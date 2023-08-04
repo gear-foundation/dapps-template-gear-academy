@@ -1,0 +1,31 @@
+[workspace]
+resolver = "2"
+members = [
+    "01-tamagotchi",
+    "02-tamagotchi-interaction",
+    "03-tamagotchi-nft",
+    "04-tamagotchi-shop",
+    "05-tamagotchi-auto",
+    "06-tamagotchi-army",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Gear Technologies"]
+license = "MIT"
+
+[workspace.dependencies]
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
+gmeta = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
+gstd = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
+gtest = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
+parity-scale-codec = { version = "3", default-features = false }
+scale-info = { version = "2", default-features = false }
+
+tmg1-io = { path = "01-tamagotchi/io" }
+tmg2-io = { path = "02-tamagotchi-interaction/io" }
+tmg3-io = { path = "03-tamagotchi-nft/io" }
+tmg4-io = { path = "04-tamagotchi-shop/io" }
+tmg5-io = { path = "05-tamagotchi-auto/io" }
+tmg6-io = { path = "06-tamagotchi-army/io" }
