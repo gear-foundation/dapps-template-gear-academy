@@ -1,0 +1,94 @@
+name: Contracts
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 01-tamagotchi/**
+      - 02-tamagotchi-interaction/**
+      - 03-tamagotchi-nft/**
+      - 04-tamagotchi-shop/**
+      - 05-tamagotchi-auto/**
+      - 06-tamagotchi-army/**
+      - Cargo.toml
+      - Cargo.lock
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  GEAR_NODE_PATH: ../gear
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check fmt
+        run: cargo fmt --all --check
+
+      - name: Run linter
+        run: cargo clippy -- -D warnings
+
+  test:
+    strategy:
+      matrix:
+        include:
+          - paths: |
+              ['Cargo.toml', 'Cargo.lock']
+            flags: --workspace
+
+          - paths: |
+              - '01-tamagotchi/**'
+            flags: -p tmg1
+
+          - paths: |
+              - '02-tamagotchi-interaction/**'
+            flags: -p tmg2
+
+          - paths: |
+              - '03-tamagotchi-nft/**'
+            flags: -p tmg3
+
+          - paths: |
+              - '04-tamagotchi-shop/**'
+            flags: -p tmg4
+
+          - paths: |
+              - '05-tamagotchi-auto/**'
+            flags: -p tmg5
+
+          - paths: |
+              - '06-tamagotchi-army/**'
+            flags: -p tmg6
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check whether files changed
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            trigger:
+              ${{ matrix.paths }}
+
+      - name: Artifact cache
+        if: steps.filter.outputs.trigger == 'true'
+        uses: Swatinem/rust-cache@v2
+
+      - name: Run tests
+        if: steps.filter.outputs.trigger == 'true'
+        run: |
+          curl -L https://get.gear.rs/vara-testnet-x86_64-unknown-linux-gnu.tar.xz | tar -xJ
+          cargo t ${{ matrix.flags }} -- --include-ignored
