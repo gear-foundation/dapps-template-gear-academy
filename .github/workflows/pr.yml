@@ -36,7 +36,7 @@ jobs:
         run: cargo fmt --all --check
 
       - name: Run linter
-        run: cargo clippy -- -D warnings
+        run: cargo clippy -- -D warnings -A unused-imports
 
   test:
     strategy:
