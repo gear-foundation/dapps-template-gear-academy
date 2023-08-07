@@ -1,8 +1,8 @@
 #![no_std]
 
 use codec::{Decode, Encode};
-use gmeta::{In, InOut, Metadata};
-use gstd::{prelude::*, ActorId};
+use gmeta::Metadata;
+use gstd::prelude::*;
 use scale_info::TypeInfo;
 
 #[derive(Default, Encode, Decode, TypeInfo)]
