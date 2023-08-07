@@ -36,8 +36,6 @@ jobs:
         run: cargo fmt --all --check
 
       - name: Run linter
-        env:
-          __GEAR_WASM_BUILDER_NO_BUILD: 1
         run: cargo clippy -- -D warnings -A unused-imports
 
   test:

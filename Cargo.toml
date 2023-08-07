@@ -16,7 +16,7 @@ authors = ["Gear Technologies"]
 license = "MIT"
 
 [workspace.dependencies]
-gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47", features = ["wasm-opt"] }
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
 gmeta = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
 gstd = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
 gtest = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
