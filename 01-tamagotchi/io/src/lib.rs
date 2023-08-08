@@ -25,9 +25,9 @@ pub struct ProgramMetadata;
 // TODO: 4️⃣ Fill `Init`, `Handle`, and `State` types
 impl Metadata for ProgramMetadata {
     type Init = ();
+    type Handle = ();
+    type State = ();
     type Reply = ();
     type Others = ();
     type Signal = ();
-    type Handle = ();
-    type State = ();
 }
