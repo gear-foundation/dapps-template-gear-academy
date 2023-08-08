@@ -1,0 +1,55 @@
+name: Frontend
+
+on:
+  pull_request:
+    branches: [master]
+    paths: [frontend/**]
+
+  push:
+    branches: [master]
+    paths: [frontend/**]
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+permissions:
+  pages: write
+  id-token: write
+
+env:
+  CI: false
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install yarn
+      run: sudo npm i yarn -g
+
+    - name: Build
+      run: |
+        yarn --cwd frontend
+        yarn --cwd frontend build
+
+    - name: Setup GitHub Pages
+      if: github.event_name == 'push'
+      uses: actions/configure-pages@v3
+
+    - name: Upload Pages artifact
+      if: github.event_name == 'push'
+      uses: actions/upload-pages-artifact@v2
+      with:
+          path: frontend/dist
+
+    - name: Deploy
+      if: github.event_name == 'push'
+      uses: actions/deploy-pages@v2
