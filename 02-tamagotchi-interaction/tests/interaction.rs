@@ -8,5 +8,5 @@ fn interaction_test() {
     sys.init_logger();
     let _program = Program::current(&sys);
 
-    // TODO: 6️⃣ Test the functionality
+    // TODO: 6️⃣ Test new functionality
 }
