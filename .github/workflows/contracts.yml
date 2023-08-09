@@ -1,4 +1,4 @@
-name: PR
+name: Contracts
 
 on:
   pull_request:
@@ -92,3 +92,17 @@ jobs:
         run: |
           curl -L https://get.gear.rs/vara-testnet-x86_64-unknown-linux-gnu.tar.xz | tar -xJ
           cargo t ${{ matrix.flags }} -- --include-ignored
+
+      - name: Build artifact
+        if: steps.filter.outputs.trigger == 'true'
+        run: |
+          cargo b ${{ matrix.flags }} --release
+          mkdir -p artifact
+          cp target/wasm32-unknown-unknown/release/*.wasm ./artifact
+          cp *.meta.txt ./artifact
+
+      - name: Upload artifact
+        if: steps.filter.outputs.trigger == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          path: artifact
