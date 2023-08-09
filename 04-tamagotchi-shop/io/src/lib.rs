@@ -28,9 +28,9 @@ pub struct ProgramMetadata;
 // TODO: 0️⃣ Copy `Metadata` from the first lesson and push changes to the master branch
 impl Metadata for ProgramMetadata {
     type Init = ();
+    type Handle = ();
+    type State = ();
     type Reply = ();
     type Others = ();
     type Signal = ();
-    type Handle = ();
-    type State = ();
 }
