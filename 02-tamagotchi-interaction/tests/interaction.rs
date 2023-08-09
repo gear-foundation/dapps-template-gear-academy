@@ -1,6 +1,6 @@
 use gtest::{Program, System};
 
-// TODO: 0️⃣ Copy tests from the previous lesson
+// TODO: 0️⃣ Copy tests from the previous lesson and push changes to the master branch
 
 #[test]
 fn interaction_test() {
