@@ -99,7 +99,7 @@ jobs:
           cargo b ${{ matrix.flags }} --release
           mkdir -p artifact
           cp target/wasm32-unknown-unknown/release/*.wasm ./artifact
-          cp *.meta.txt ./artifact
+          find . -name "*.meta.txt" -exec cp -fv {} ./artifact/ \;
 
       - name: Upload artifact
         if: steps.filter.outputs.trigger == 'true'
