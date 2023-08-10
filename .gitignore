@@ -14,10 +14,13 @@ Cargo.lock
 *.pdb
 
 # Frontend
-frontend/node_modules
-frontend/dist
+dist/
+node_modules/
 *.log
 
 # Gear specific
 .binpath
 *.meta.txt
+
+# Misc
+.DS_Store

@@ -1,0 +1,97 @@
+wsAddress: wss://testnet.vara.rs
+
+accounts:
+  alice: //Alice
+
+codes:
+  - name: FT Storage
+    id: 0
+    path_to_wasm: ./programs/ft_storage.opt.wasm
+
+  - name: FT Logic
+    id: 1
+    path_to_wasm: ./programs/ft_logic.opt.wasm
+
+programs:
+  - name: Fungible Token
+    id: 0
+    path_to_wasm: ./programs/ft_main.opt.wasm
+    path_to_meta: ./programs/ft_meta.txt
+    payload:
+      storage_code_hash: $code 0
+      ft_logic_code_hash: $code 1
+
+  - name: Store
+    id: 1
+    path_to_wasm: ./programs/store.opt.wasm
+    path_to_meta: ./programs/store_meta.txt
+    payload: $program 0
+
+transactions:
+  - type: upload_code
+    code: 0
+    account: alice
+
+  - type: upload_code
+    code: 1
+    account: alice
+
+  - type: upload_program
+    program: 0
+    account: alice
+
+  - type: upload_program
+    program: 1
+    account: alice
+
+  - type: send_message
+    program: 1
+    account: alice
+    payload:
+      createAttribute:
+        attribute_id: 0
+        attr_metadata:
+            title: Sword
+            description: sword
+            media: sword
+        price: 2500
+    value: 0
+
+  - type: send_message
+    program: 1
+    account: alice
+    payload:
+      createAttribute:
+        attribute_id: 1
+        attr_metadata:
+            title: Hat
+            description: hat
+            media: hat
+        price: 800
+    value: 0
+
+  - type: send_message
+    program: 1
+    account: alice
+    payload:
+      createAttribute:
+        attribute_id: 2
+        attr_metadata:
+            title: Bag
+            description: bag
+            media: bag
+        price: 1200
+    value: 0
+
+  - type: send_message
+    program: 1
+    account: alice
+    payload:
+      createAttribute:
+        attribute_id: 3
+        attr_metadata:
+            title: Glasses
+            description: glasses
+            media: glasses
+        price: 1000
+    value: 0

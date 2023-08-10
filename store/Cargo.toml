@@ -1,5 +1,5 @@
 [package]
-name = "tmg4"
+name = "store"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -8,15 +8,11 @@ authors.workspace = true
 [dependencies]
 gstd = { workspace = true, features = ["debug"] }
 parity-scale-codec.workspace = true
+store-io.workspace = true
+ft-main-io.workspace = true
 scale-info.workspace = true
-tmg4-io.workspace = true
-
-# TODO: 1️⃣ Add `ft-main-io` and `store-io` crates as dependencies
 
 [build-dependencies]
 gmeta.workspace = true
 gear-wasm-builder.workspace = true
-tmg4-io.workspace = true
-
-[dev-dependencies]
-gtest.workspace = true
+store-io.workspace = true
