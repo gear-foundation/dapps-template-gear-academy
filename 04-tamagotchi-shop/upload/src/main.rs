@@ -6,13 +6,11 @@ use gclient::{
 use gear_core::ids::CodeId;
 use gsdk::{result::TxError, Error as GearSDKError};
 use parity_scale_codec::Encode;
+use std::fs;
 
-const FT_STORAGE_WASM: &[u8] =
-    include_bytes!("../../../target/wasm32-unknown-unknown/release/ft_storage.opt.wasm");
-const FT_LOGIC_WASM: &[u8] =
-    include_bytes!("../../../target/wasm32-unknown-unknown/release/ft_logic.opt.wasm");
-const FT_MAIN_WASM: &[u8] =
-    include_bytes!("../../../target/wasm32-unknown-unknown/release/ft_main.opt.wasm");
+const FT_STORAGE_WASM: &str = "ft_storage.opt.wasm";
+const FT_LOGIC_WASM: &str = "ft_logic.opt.wasm";
+const FT_MAIN_WASM: &str = "ft_main.opt.wasm";
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -66,9 +64,12 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-async fn upload_code(api: &GearApi, code: &[u8]) -> Result<CodeId> {
-    let res = api.upload_code(code).await;
-    let ft_storage_code_id = CodeId::generate(code);
+async fn upload_code(api: &GearApi, file_name: &'static str) -> Result<CodeId> {
+    let code = fs::read(format!(
+        "target/wasm32-unknown-unknown/release/{file_name}"
+    ))?;
+    let res = api.upload_code(&code).await;
+    let ft_storage_code_id = CodeId::generate(&code);
     let code_id = match res {
         Err(Error::Module(ModuleError::Gear(Gear::CodeAlreadyExists))) => {
             println!("    Code already exists, skipping upload");
