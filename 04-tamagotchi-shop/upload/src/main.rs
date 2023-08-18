@@ -65,9 +65,7 @@ async fn main() -> Result<()> {
 }
 
 async fn upload_code(api: &GearApi, file_name: &'static str) -> Result<CodeId> {
-    let code = fs::read(format!(
-        "target/wasm32-unknown-unknown/release/{file_name}"
-    ))?;
+    let code = fs::read(format!("target/wasm32-unknown-unknown/release/{file_name}"))?;
     let res = api.upload_code(&code).await;
     let ft_storage_code_id = CodeId::generate(&code);
     let code_id = match res {
