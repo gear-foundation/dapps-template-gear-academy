@@ -1,5 +1,5 @@
 use gtest::{Program, System, Log};
-use tmg1_io::{Tamagotchi, TmgAction};
+use tmg1_io::{TmgAction, TmgEvent};
 
 #[test]
 fn smoke_test() {
@@ -17,6 +17,6 @@ fn smoke_test() {
     let expected_log = Log::builder()
         .dest(2)
         // I don't understand why the test passes for arbitrary payload
-        .payload_bytes("????");
-    assert!(res.contains(&expected_log))
+        .payload(TmgEvent::Name("????".to_string()));
+    assert!(res.contains(&expected_log));
 }

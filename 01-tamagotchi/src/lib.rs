@@ -1,7 +1,7 @@
 #![no_std]
 
 use gstd::{exec, msg, prelude::*};
-use tmg1_io::{Tamagotchi, TmgAction};
+use tmg1_io::{Tamagotchi, TmgAction, TmgEvent};
 
 static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
@@ -19,16 +19,19 @@ extern "C" fn init() {
 
 #[no_mangle]
 extern "C" fn handle() {
-    let action: TmgAction = msg::load().expect("Error in loading Tamagotchi Action");
+    let action: TmgAction = msg::load().expect("Error on loading Tamagotchi Action");
     let tmg = unsafe { TAMAGOTCHI.as_ref().unwrap() };
 
-    let _ = match action {
-        TmgAction::Name => msg::reply(tmg.name.clone(), 0),
-        TmgAction::Age => msg::reply(exec::block_timestamp() - tmg.date_of_birth, 0),
-    };
+    match action {
+        TmgAction::Name => msg::reply(TmgEvent::Name(tmg.name.clone()), 0),
+        TmgAction::Age => msg::reply(
+            TmgEvent::Age(exec::block_timestamp() - tmg.date_of_birth), 0
+        ),
+    }
+    .expect("Failed replying to sender");
 }
 
 #[no_mangle]
 extern "C" fn state() {
-    msg::reply(unsafe { TAMAGOTCHI.clone().unwrap() }, 0).expect("Unable to return Tamagotchi instance");
+    msg::reply(unsafe { TAMAGOTCHI.as_ref().unwrap() }, 0).expect("Unable to return Tamagotchi instance");
 }
