@@ -1,6 +1,7 @@
 #![no_std]
 
-use gmeta::{In, InOut, Metadata as GMetadata};
+use gmeta::{In, InOut, Metadata as GMetadata, Out};
+use gstd::prelude::collections::{BTreeMap, BTreeSet};
 use gstd::{prelude::*, ActorId};
 pub type AttributeId = u32;
 pub type Price = u128;
@@ -15,7 +16,7 @@ impl GMetadata for ProgramMetadata {
     type Reply = ();
     type Others = ();
     type Signal = ();
-    type State = AttributeStore;
+    type State = Out<AttributeStore>;
 }
 
 #[derive(Default, Encode, Decode, TypeInfo)]
