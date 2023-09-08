@@ -1,7 +1,7 @@
 import type { ProviderProps } from '@gear-js/react-hooks'
 import { createContext } from 'react'
 import { ProgramMetadata } from '@gear-js/api'
-import meta from '@/assets/meta/sharded-fungible-token.meta.txt'
+import meta from '@/assets/meta/sharded_fungible_token.meta.txt'
 import metaLogic from '@/assets/meta/sharded_fungible_token_logic.meta.txt'
 import metaStorage from '@/assets/meta/sharded_fungible_token_storage.meta.txt'
 import { HexString } from '@polkadot/util/types'
