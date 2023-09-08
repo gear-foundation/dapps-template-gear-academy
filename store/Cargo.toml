@@ -9,7 +9,7 @@ authors.workspace = true
 gstd = { workspace = true, features = ["debug"] }
 parity-scale-codec.workspace = true
 store-io.workspace = true
-ft-main-io.workspace = true
+sharded-fungible-token-io.workspace = true
 scale-info.workspace = true
 
 [build-dependencies]

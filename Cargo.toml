@@ -18,10 +18,10 @@ authors = ["Gear Technologies"]
 license = "MIT"
 
 [workspace.dependencies]
-ft-logic = { git = "https://github.com/gear-foundation/dapps-sharded-fungible-token.git", tag = "2.1.4" }
-ft-main = { git = "https://github.com/gear-foundation/dapps-sharded-fungible-token.git", tag = "2.1.4" }
-ft-main-io = { git = "https://github.com/gear-foundation/dapps-sharded-fungible-token.git", tag = "2.1.4" }
-ft-storage = { git = "https://github.com/gear-foundation/dapps-sharded-fungible-token.git", tag = "2.1.4" }
+sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps.git", branch = "dev" }
+sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps.git", branch = "dev" }
+sharded-fungible-token-io = { git = "https://github.com/gear-foundation/dapps.git", branch = "dev" }
+sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps.git", branch = "dev" }
 gclient = { git = "https://github.com/gear-tech/gear.git", rev = "e9b6d89" }
 gear-core = { git = "https://github.com/gear-tech/gear.git", rev = "e9b6d89" }
 gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "e9b6d89" }

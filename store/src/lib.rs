@@ -1,8 +1,8 @@
 #![no_std]
 
-use ft_main_io::{FTokenAction, FTokenEvent, LogicAction};
-use gstd::prelude::collections::{BTreeMap, BTreeSet};
+use gstd::collections::{BTreeMap, BTreeSet};
 use gstd::{exec, msg, prelude::*, ActorId};
+use sharded_fungible_token_io::{FTokenAction, FTokenEvent, LogicAction};
 use store_io::{
     AttrMetadata, AttributeId, Price, StoreAction, StoreEvent, TamagotchiId, TransactionId,
 };

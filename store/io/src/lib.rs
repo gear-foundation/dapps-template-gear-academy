@@ -1,7 +1,7 @@
 #![no_std]
 
 use gmeta::{In, InOut, Metadata as GMetadata, Out};
-use gstd::prelude::collections::{BTreeMap, BTreeSet};
+use gstd::collections::{BTreeMap, BTreeSet};
 use gstd::{prelude::*, ActorId};
 pub type AttributeId = u32;
 pub type Price = u128;

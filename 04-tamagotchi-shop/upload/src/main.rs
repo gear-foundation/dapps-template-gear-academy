@@ -1,4 +1,3 @@
-use ft_main_io::InitFToken;
 use gclient::{
     errors::{Gear, ModuleError},
     Error, GearApi, Result,
@@ -6,11 +5,12 @@ use gclient::{
 use gear_core::ids::CodeId;
 use gsdk::{result::TxError, Error as GearSDKError};
 use parity_scale_codec::Encode;
+use sharded_fungible_token_io::InitFToken;
 use std::fs;
 
-const FT_STORAGE_WASM: &str = "ft_storage.opt.wasm";
-const FT_LOGIC_WASM: &str = "ft_logic.opt.wasm";
-const FT_MAIN_WASM: &str = "ft_main.opt.wasm";
+const FT_STORAGE_WASM: &str = "sharded_fungible_token_storage.opt.wasm";
+const FT_LOGIC_WASM: &str = "sharded_fungible_token_logic.opt.wasm";
+const FT_MAIN_WASM: &str = "sharded-fungible-token.opt.wasm";
 
 #[tokio::main]
 async fn main() -> Result<()> {

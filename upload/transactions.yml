@@ -6,17 +6,17 @@ accounts:
 codes:
   - name: FT Storage
     id: 0
-    path_to_wasm: ./programs/ft_storage.opt.wasm
+    path_to_wasm: ./programs/sharded_fungible_token_storage.opt.wasm
 
   - name: FT Logic
     id: 1
-    path_to_wasm: ./programs/ft_logic.opt.wasm
+    path_to_wasm: ./programs/sharded_fungible_token_logic.opt.wasm
 
 programs:
   - name: Fungible Token
     id: 0
-    path_to_wasm: ./programs/ft_main.opt.wasm
-    path_to_meta: ./programs/ft_meta.txt
+    path_to_wasm: ./programs/sharded-fungible-token.opt.wasm
+    path_to_meta: ./programs/sharded_fungible_token.meta.txt
     payload:
       storage_code_hash: $code 0
       ft_logic_code_hash: $code 1
