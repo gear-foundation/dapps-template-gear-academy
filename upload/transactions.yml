@@ -15,7 +15,7 @@ codes:
 programs:
   - name: Fungible Token
     id: 0
-    path_to_wasm: ./programs/sharded-fungible-token.opt.wasm
+    path_to_wasm: ./programs/sharded_fungible_token.opt.wasm
     path_to_meta: ./programs/sharded_fungible_token.meta.txt
     payload:
       storage_code_hash: $code 0
