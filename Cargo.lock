@@ -200,9 +200,9 @@ checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
 
 [[package]]
 name = "base64"
-version = "0.21.3"
+version = "0.21.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "414dcefbc63d77c526a76b3afcf6fbb9b5e2791c19c3aa2297733208750c6e53"
+checksum = "9ba43ea6f343b788c8764558649e08df62f86c6ef251fdaeb1ffd010a9ae50a2"
 
 [[package]]
 name = "beef"
@@ -1439,7 +1439,7 @@ dependencies = [
 [[package]]
 name = "gear-lib-old"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gstd",
  "primitive-types",
@@ -1656,7 +1656,7 @@ version = "0.3.2"
 source = "git+https://github.com/gear-tech/gear.git?rev=e9b6d89#e9b6d89cf5cbbd86506458754f3e686856d5dded"
 dependencies = [
  "anyhow",
- "base64 0.21.3",
+ "base64 0.21.4",
  "futures",
  "futures-util",
  "gear-core",
@@ -2101,7 +2101,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cb0889898416213fab133e1d33a0e5858a48177452750691bde3666d0fdbaf8b"
 dependencies = [
  "hermit-abi",
- "rustix 0.38.11",
+ "rustix 0.38.12",
  "windows-sys 0.48.0",
 ]
 
@@ -2344,9 +2344,9 @@ checksum = "ef53942eb7bf7ff43a617b3e2c1c4a5ecf5944a7c1bc12d7ee39bbb15e5c1519"
 
 [[package]]
 name = "linux-raw-sys"
-version = "0.4.5"
+version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57bcfdad1b858c2db7c38303a6d2ad4dfaf5eb53dfeb0910128b2c26d6158503"
+checksum = "1a9bad9f94746442c783ca431b22403b519cd7fbeed0533fdd6328b2f2212128"
 
 [[package]]
 name = "lock_api"
@@ -2701,9 +2701,9 @@ dependencies = [
 
 [[package]]
 name = "parity-scale-codec"
-version = "3.6.7"
+version = "3.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d640b40e81625f53b59f9c5812d3fb9e7ce11971d3fb34268eb7a83adf98051"
+checksum = "0dec8a8073036902368c2cdc0387e85ff9a37054d7e7c98e592145e0c92cd4fb"
 dependencies = [
  "arrayvec 0.7.4",
  "bitvec",
@@ -2716,9 +2716,9 @@ dependencies = [
 
 [[package]]
 name = "parity-scale-codec-derive"
-version = "3.6.7"
+version = "3.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7ac464815d51fff2f64d690bf6ea4442d365e53495d50737685cfecfa3dd3f62"
+checksum = "312270ee71e1cd70289dacf597cab7b207aa107d2f28191c2ae45b2ece18a260"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
@@ -3281,14 +3281,14 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.38.11"
+version = "0.38.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c0c3dde1fc030af041adc40e79c0e7fbcf431dd24870053d187d7c66e4b87453"
+checksum = "bdf14a7a466ce88b5eac3da815b53aefc208ce7e74d1c263aabb04d88c4abeb1"
 dependencies = [
  "bitflags 2.4.0",
  "errno",
  "libc",
- "linux-raw-sys 0.4.5",
+ "linux-raw-sys 0.4.7",
  "windows-sys 0.48.0",
 ]
 
@@ -3322,7 +3322,7 @@ version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2d3987094b1d07b653b7dfdc3f70ce9a1da9c51ac18c1b06b662e4f9a0e9f4b2"
 dependencies = [
- "base64 0.21.3",
+ "base64 0.21.4",
 ]
 
 [[package]]
@@ -3649,9 +3649,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.105"
+version = "1.0.106"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "693151e1ac27563d6dbcec9dee9fbd5da8539b20fa14ad3752b2e6d363ace360"
+checksum = "2cc66a619ed80bf7a0f6b17dd063a84b88f6dea1813737cf469aef1d081142c2"
 dependencies = [
  "itoa",
  "ryu",
@@ -3729,7 +3729,7 @@ dependencies = [
 [[package]]
 name = "sharded-fungible-token"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gear-wasm-builder",
  "gstd",
@@ -3742,7 +3742,7 @@ dependencies = [
 [[package]]
 name = "sharded-fungible-token-io"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gmeta",
  "gstd",
@@ -3752,7 +3752,7 @@ dependencies = [
 [[package]]
 name = "sharded-fungible-token-logic"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gear-lib-old",
  "gear-wasm-builder",
@@ -3767,7 +3767,7 @@ dependencies = [
 [[package]]
 name = "sharded-fungible-token-logic-io"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gmeta",
  "gstd",
@@ -3779,7 +3779,7 @@ dependencies = [
 [[package]]
 name = "sharded-fungible-token-storage"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gear-wasm-builder",
  "gstd",
@@ -3790,7 +3790,7 @@ dependencies = [
 [[package]]
 name = "sharded-fungible-token-storage-io"
 version = "0.3.2"
-source = "git+https://github.com/gear-foundation/dapps.git?branch=dev#3b567db017aaa5aeed78e5a83cf483ca2d7825c5"
+source = "git+https://github.com/gear-foundation/dapps.git?rev=820898d#820898d074467e88f3d050378aebb952144cd1de"
 dependencies = [
  "gmeta",
  "gstd",
@@ -4752,7 +4752,7 @@ dependencies = [
  "cfg-if",
  "fastrand",
  "redox_syscall 0.3.5",
- "rustix 0.38.11",
+ "rustix 0.38.12",
  "windows-sys 0.48.0",
 ]
 
@@ -5022,9 +5022,9 @@ dependencies = [
 
 [[package]]
 name = "toml"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de0a3ab2091e52d7299a39d098e200114a972df0a7724add02a273aa9aada592"
+checksum = "dd79e69d3b627db300ff956027cc6c3798cef26d22526befdfcd12feeb6d2257"
 dependencies = [
  "serde",
  "serde_spanned",
@@ -5931,7 +5931,7 @@ dependencies = [
  "either",
  "home",
  "once_cell",
- "rustix 0.38.11",
+ "rustix 0.38.12",
 ]
 
 [[package]]
