@@ -4,6 +4,7 @@ on:
   pull_request:
     paths-ignore: frontend/**
   push:
+    branches: [master]
     paths-ignore: frontend/**
 
 env:
