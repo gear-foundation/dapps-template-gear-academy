@@ -1,0 +1,46 @@
+[workspace.package]
+homepage = "https://academy.gear.foundation"
+authors = ["Gear Foundation <hello@gear.foundation>"]
+version = "0.3.3"
+license = "MIT"
+edition = "2021"
+publish = false
+
+[workspace]
+resolver = "2"
+members = [
+    "01-tamagotchi",
+    "02-tamagotchi-interaction",
+    "03-tamagotchi-nft",
+    "04-tamagotchi-shop",
+    "04-tamagotchi-shop/store",
+    "04-tamagotchi-shop/upload",
+    "05-tamagotchi-auto",
+    "06-tamagotchi-army",
+]
+
+[workspace.dependencies]
+gclient = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gear-core = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gmeta = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gsdk = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gstd = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gtest = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+
+sharded-fungible-token-io = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+tamagotchi-io.path = "01-tamagotchi/io"
+tamagotchi-interaction-io.path = "02-tamagotchi-interaction/io"
+tamagotchi-nft-io.path = "03-tamagotchi-nft/io"
+tamagotchi-shop-io.path = "04-tamagotchi-shop/io"
+store-io.path = "04-tamagotchi-shop/store/io"
+tamagotchi-auto-io.path = "05-tamagotchi-auto/io"
+tamagotchi-army-io.path = "06-tamagotchi-army/io"
+
+tokio = "1"
+
+# External binaries
+
+sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }

@@ -1,0 +1,16 @@
+[package]
+name = "tamagotchi-nft"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+gstd.workspace = true
+tamagotchi-nft-io.workspace = true
+
+[build-dependencies]
+gear-wasm-builder.workspace = true
+tamagotchi-nft-io.workspace = true
+
+[dev-dependencies]
+gtest.workspace = true

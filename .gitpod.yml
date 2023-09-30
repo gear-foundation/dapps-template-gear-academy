@@ -1,0 +1,9 @@
+image: gitpod/workspace-rust
+tasks:
+  - init: |
+      sudo apt update
+      sudo apt install cmake binaryen -y
+      clear
+vscode:
+  extensions:
+    - rust-lang.rust-analyzer
