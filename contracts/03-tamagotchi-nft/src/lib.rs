@@ -24,7 +24,8 @@ extern fn init() {
         entertained: 5000,
         entertained_block: block_height,
         rested: 5000,
-        rested_block: block_height
+        rested_block: block_height,
+        approved_account: None
     };
     unsafe {
         TAMAGOTCHI = Some(new_tamagotchi);
@@ -67,6 +68,40 @@ extern fn handle() {
             update_field(&mut tamagotchi.rested, FILL_PER_SLEEP);
             msg::reply(TmgEvent::Slept, 0)
                 .expect("Error sending tamagotchi variant 'Slept'");  
+        },
+        TmgAction::Transfer(actor_id) => {
+            let source_id = msg::source();
+            let mut owner_transfered = false;
+            if tamagotchi.owner == source_id {
+                tamagotchi.owner = actor_id;
+                owner_transfered = true;
+            }
+            if let Some(approved_account) = tamagotchi.approved_account {
+                if approved_account == source_id {
+                    tamagotchi.owner = actor_id;
+                    owner_transfered = true;
+                }
+            }
+            if owner_transfered {
+                msg::reply(TmgEvent::Transferred(actor_id), 0)
+                    .expect("Error in sending reply");
+            }
+        },
+        TmgAction::Approve(actor_id) => {
+            let source_id = msg::source();
+            if tamagotchi.owner == source_id {
+                tamagotchi.approved_account = Some(actor_id);
+                msg::reply(TmgEvent::Approved(actor_id), 0)
+                    .expect("Error in sending reply");
+            }
+        },
+        TmgAction::RevokeApproval => {
+            let source_id = msg::source();
+            if tamagotchi.owner == source_id {
+                tamagotchi.approved_account = None;
+                msg::reply(TmgEvent::ApprovalRevoked, 0)
+                    .expect("Error in sending reply");
+            }
         }
     }
 }
