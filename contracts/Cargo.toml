@@ -41,7 +41,6 @@ tokio = "1"
 
 # External binaries
 
-store.path = "04-tamagotchi-shop/store"
 sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
 sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
 sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
