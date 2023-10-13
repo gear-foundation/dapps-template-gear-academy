@@ -78,3 +78,7 @@ pub enum StoreEvent {
     FtContractIdSet { ft_contract_id: ActorId },
     TxRemoved { tamagotchi_id: ActorId },
 }
+
+
+
+

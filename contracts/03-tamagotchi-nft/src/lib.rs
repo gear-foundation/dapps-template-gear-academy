@@ -39,8 +39,7 @@ extern fn handle() {
     // TODO: 0️⃣ Copy the `handle` function from the previous lesson and push changes to the master branch
     let type_message: TmgAction = msg::load()
         .expect("error in load message");
-    // In each call all tamagotchi fields are updated
-    update_tamagotchi_fields();
+    
     let tamagotchi = state_mut();
 
     match type_message {
@@ -50,22 +49,22 @@ extern fn handle() {
                 .expect("Error in sending tamagotchi name");
         },
         TmgAction::Age => {
-            let tamagotchi_age = TmgEvent::Age(tamagotchi.date_of_birth);
+            let tamagotchi_age = TmgEvent::Age(blocks_height() - tamagotchi.date_of_birth);
             msg::reply(tamagotchi_age, 0)
                 .expect("Errorin sending tamagotchi age");
         },
         TmgAction::Feed => {
-            update_field(&mut tamagotchi.fed, FILL_PER_FEED);
+            tamagotchi.feed();
             msg::reply(TmgEvent::Fed, 0)
                 .expect("Error sending tamagotchi variant 'Fed'");
         },
         TmgAction::Play => {
-            update_field(&mut tamagotchi.entertained, FILL_PER_ENTERTAINMENT);
+            tamagotchi.play(); 
             msg::reply(TmgEvent::Entertained, 0)
                 .expect("Error sending tamagotchi variant 'Entertained'");  
         },
         TmgAction::Sleep => {
-            update_field(&mut tamagotchi.rested, FILL_PER_SLEEP);
+            tamagotchi.sleep();
             msg::reply(TmgEvent::Slept, 0)
                 .expect("Error sending tamagotchi variant 'Slept'");  
         },
@@ -76,11 +75,9 @@ extern fn handle() {
                 tamagotchi.owner = actor_id;
                 owner_transfered = true;
             }
-            if let Some(approved_account) = tamagotchi.approved_account {
-                if approved_account == source_id {
-                    tamagotchi.owner = actor_id;
-                    owner_transfered = true;
-                }
+            if tamagotchi.approved_account == Some(source_id) {
+                tamagotchi.owner = actor_id;
+                owner_transfered = true;
             }
             if owner_transfered {
                 msg::reply(TmgEvent::Transferred(actor_id), 0)
@@ -113,11 +110,6 @@ extern fn state() {
         .expect("Failed to share state");
 }
 
-
-fn blocks_height() -> u64 {
-    exec::block_height() as u64
-}
-
 fn state_ref() -> &'static Tamagotchi {
     let state = unsafe { TAMAGOTCHI.as_ref() };
     debug_assert!(state.is_some(), "State is not initialized");
@@ -130,49 +122,3 @@ fn state_mut() -> &'static mut Tamagotchi {
     unsafe { state.unwrap_unchecked() } 
 }
 
-fn update_tamagotchi_fields() {
-    let state = state_mut();
-    let blocks_height = blocks_height();
-    state.fed = updated_field_value(
-        state.fed,
-        state.fed_block,
-        HUNGER_PER_BLOCK,
-        blocks_height
-    );
-    state.fed_block = blocks_height;
-    
-    state.entertained = updated_field_value(
-        state.entertained,
-        state.entertained_block,
-        BOREDOM_PER_BLOCK,
-        blocks_height
-    );
-    state.entertained_block = blocks_height;  
-      
-    state.rested = updated_field_value(
-        state.rested,
-        state.rested_block,
-        ENERGY_PER_BLOCK,
-        blocks_height
-    );
-    state.rested_block = blocks_height;    
-}
-
-fn updated_field_value(field: u64, field_block: u64, value_per_block: u64, blocks_height: u64) -> u64 {
-    let total_value_to_rest = (blocks_height - field_block) * value_per_block;
-    if field >= total_value_to_rest {
-        // If the given value of the tamagotchi is greater than the value to be 
-        // subtracted after a certain number of blocks, the update value is
-        // returned
-        field - total_value_to_rest
-    } else {
-        // If not, the given value is smaller, causing a negative result, zero
-        // is returned instead. 
-        0
-    }
-}
-
-fn update_field(field: &mut u64, increase_value: u64) {
-    *field += increase_value;
-    *field = *field.min(&mut 10_000);
-} 
