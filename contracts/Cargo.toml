@@ -29,6 +29,9 @@ gstd = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
 gtest = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
 
 sharded-fungible-token-io = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
 tamagotchi-io.path = "01-tamagotchi/io"
 tamagotchi-interaction-io.path = "02-tamagotchi-interaction/io"
 tamagotchi-nft-io.path = "03-tamagotchi-nft/io"
@@ -41,6 +44,4 @@ tokio = "1"
 
 # External binaries
 
-sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
-sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
-sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+
