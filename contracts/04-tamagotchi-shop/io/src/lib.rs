@@ -234,24 +234,3 @@ pub fn update_field(field: u64, increase_value: u64) -> u64 {
     field.min(10_000)
 } 
 
-
-/*
-pub async fn message_to_ft_contract(ft_action: FTokenAction) -> FTokenEvent {
-    msg::send_for_reply_as::<_, FTokenEvent>(
-        self.ft_contract_id,
-        FTokenAction::Message {
-            transaction_id: self.transaction_id,
-            payload: LogicAction::Approve {
-                approved_account: account,
-                amount,
-            },
-        },
-        0,
-        0,
-    )
-    .expect("Error in sending a message `FTokenAction::Message`")
-    .await
-    .expect("Error in decoding 'FTokenEvent'")
-}
-
-*/
