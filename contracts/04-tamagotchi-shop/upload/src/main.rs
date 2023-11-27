@@ -3,7 +3,7 @@ use gclient::{
     Error, GearApi, Result,
 };
 use gear_core::ids::CodeId;
-use gsdk::{gp::Encode, result::TxError, Error as GearSDKError};
+use gsdk::gp::Encode;
 use sharded_fungible_token_io::InitFToken;
 use std::fs;
 
@@ -72,10 +72,6 @@ async fn upload_code(api: &GearApi, file_name: &'static str) -> Result<CodeId> {
     let code_id = match res {
         Err(Error::Module(ModuleError::Gear(Gear::CodeAlreadyExists))) => {
             println!("    Code already exists, skipping upload");
-            ft_storage_code_id
-        }
-        Err(Error::GearSDK(GearSDKError::Tx(TxError::Retracted(_)))) => {
-            println!("    Retracted transaction, continuing");
             ft_storage_code_id
         }
         Ok((code_id, _)) => {
