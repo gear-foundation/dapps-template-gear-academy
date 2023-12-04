@@ -42,5 +42,5 @@ export function useInitBattleData() {
 
 export function useBattleMessage() {
   const metadata = useProgramMetadata(metaBattle)
-  return useSendMessage(ENV.battle, metadata)
+  return { sendMessage: useSendMessage(ENV.battle, metadata), metadata }
 }

@@ -4,6 +4,10 @@ import { hexRequired } from '@/app/utils/form-validations'
 import { useApp } from '@/app/context'
 import { useTamagotchiMessage } from '@/app/hooks/use-tamagotchi'
 import { SpriteIcon } from '@/components/ui/sprite-icon'
+import { ENV } from '@/app/consts'
+import { useHandleCalculateGas } from '@/app/hooks/use-handle-calculate-gas'
+import { withoutCommas } from '@gear-js/react-hooks'
+import { useCheckBalance } from '@/app/hooks/use-check-balance'
 
 const initialValues = {
   address: '',
@@ -15,13 +19,39 @@ const validate = {
 
 export const TransferAccountForm = ({ close }: { close: () => void }) => {
   const { isPending } = useApp()
-  const sendHandler = useTamagotchiMessage()
+  const { send: sendHandler, lessonMeta } = useTamagotchiMessage()
+  const calculateGas = useHandleCalculateGas(ENV.battle, lessonMeta)
+  const { checkBalance } = useCheckBalance()
   const form = useForm({ initialValues, validate })
   const { getInputProps } = form
   const onSuccess = () => close()
 
   const handleSubmit = form.onSubmit((values) => {
-    sendHandler({ Transfer: values.address }, { onSuccess })
+    const payload = { Transfer: values.address }
+
+    calculateGas(payload)
+      .then((res) => res.toHuman())
+      .then(({ min_limit }) => {
+        const minLimit = withoutCommas(min_limit as string)
+        const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+        checkBalance(
+          gasLimit,
+          () => {
+            sendHandler({
+              payload,
+              gasLimit,
+              onSuccess,
+            })
+          },
+          () => {
+            console.log('error')
+          }
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   })
 
   return (

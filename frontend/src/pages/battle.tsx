@@ -7,40 +7,90 @@ import { TamagotchiState } from '@/app/types/lessons'
 import { TamagotchiBattleTopStats } from '@/components/tamagotchi/tamagotchi-battle-top-stats'
 import { TamagotchiAvatar } from '@/components/tamagotchi/tamagotchi-avatar'
 import { getTamagotchiAgeDiff } from '@/app/utils/get-tamagotchi-age'
-import { cn, getAttributesById } from "@/app/utils";
+import { cn, getAttributesById } from '@/app/utils'
 import { SpriteIcon } from '@/components/ui/sprite-icon'
 import { TamagotchiBattleInfoCard } from '@/components/tamagotchi/tamagotchi-battle-info-card'
 import { StartBattleForm } from '@/components/forms/start-battle-form'
+import { ENV } from '@/app/consts'
+import { useHandleCalculateGas } from '@/app/hooks/use-handle-calculate-gas'
+import { useCheckBalance } from '@/app/hooks/use-check-balance'
 
 export default function Battle() {
   const { account } = useAccount()
   const { isPending, setIsPending } = useApp()
   const { store } = useFTStore()
   const { battleState: battle, players: warriors, setBattleState } = useBattle()
+  const { sendMessage, metadata } = useBattleMessage()
+  const calculateGas = useHandleCalculateGas(ENV.battle, metadata)
+  const { checkBalance } = useCheckBalance()
   useInitBattleData()
   const [isAllowed, setIsAllowed] = useState<boolean>(false)
   const [winner, setWinner] = useState<TamagotchiState>()
-  const sendMessage = useBattleMessage()
 
   const handleAttack = () => {
     const onError = () => setIsPending(false)
     const onSuccess = () => setIsPending(false)
     if (battle?.state === 'GameIsOver') {
+      const payload = { StartNewGame: null }
+
       setIsPending(true)
-      sendMessage(
-        { StartNewGame: null },
-        {
-          onSuccess: () => {
-            setBattleState(undefined)
-            setIsPending(false)
-          },
-          onError,
-        }
-      )
+
+      calculateGas(payload)
+        .then((res) => res.toHuman())
+        .then(({ min_limit }) => {
+          const minLimit = withoutCommas(min_limit as string)
+          const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+          checkBalance(
+            gasLimit,
+            () => {
+              sendMessage({
+                payload,
+                gasLimit,
+                onSuccess: () => {
+                  setBattleState(undefined)
+                  setIsPending(false)
+                },
+                onError,
+              })
+            },
+            onError
+          )
+        })
+        .catch((error) => {
+          console.log(error)
+          onError()
+        })
     }
+
     if (battle?.state === 'Moves') {
+      const payload = { MakeMove: null }
+
       setIsPending(true)
-      sendMessage({ MakeMove: null }, { onError, onSuccess })
+
+      calculateGas(payload)
+        .then((res) => res.toHuman())
+        .then(({ min_limit }) => {
+          const minLimit = withoutCommas(min_limit as string)
+          const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+          checkBalance(
+            gasLimit,
+            () => {
+              sendMessage({
+                payload,
+                gasLimit,
+                onSuccess,
+                onError,
+              })
+            },
+            onError
+          )
+        })
+        .catch((error) => {
+          console.log(error)
+          onError()
+        })
     }
   }
 
