@@ -18,6 +18,10 @@ const Component = () => {
   useEffect(() => {
     console.log('Node')
     console.log(ENV.NODE)
+    console.log('store')
+    console.log(ENV.store)
+    console.log('battle')
+    console.log(ENV.battle)
   }, [])
 
   return (
