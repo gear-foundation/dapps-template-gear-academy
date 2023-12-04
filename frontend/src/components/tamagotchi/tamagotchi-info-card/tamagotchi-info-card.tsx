@@ -3,10 +3,14 @@ import { useApp, useLessons, useTamagotchi } from '@/app/context'
 import { useLesson5 } from '@/app/hooks/use-lesson-5'
 import { useTamagotchiMessage } from '@/app/hooks/use-tamagotchi'
 import { NotificationResponseTypes } from '@/app/types/lessons'
+import metaBattle from '@/assets/meta/meta-battle.txt'
 import { cn, getNotificationTypeValue } from '@/app/utils'
 import { AccountActionsMenu } from '@/components/menus/account-actions-menu'
 import { getTamagotchiAge } from '@/app/utils/get-tamagotchi-age'
 import { TamagotchiInfoCardRow } from '@/components/tamagotchi/tamagotchi-info-card-row'
+import { useHandleCalculateGas } from '@/app/hooks/use-handle-calculate-gas'
+import { ENV } from '@/app/consts'
+import { useCheckBalance } from '@/app/hooks/use-check-balance'
 
 export const TamagotchiInfoCard = () => {
   const { account } = useAccount()
@@ -15,7 +19,9 @@ export const TamagotchiInfoCard = () => {
   const { tamagotchi } = useTamagotchi()
   const { setNotification, activeNotification, setActiveNotification } =
     useLesson5()
-  const send = useTamagotchiMessage()
+  const { checkBalance } = useCheckBalance()
+  const { send, lessonMeta } = useTamagotchiMessage()
+  const calculateGas = useHandleCalculateGas(ENV.battle, lessonMeta)
 
   const fullView = Boolean(lesson && lesson?.step > 1)
 
@@ -31,28 +37,91 @@ export const TamagotchiInfoCard = () => {
   }
   const onError = () => setIsPending(false)
   const feedHandler = () => {
+    const payload = { Feed: null }
+
     setIsPending(true)
-    send({ Feed: null }, { onSuccess: () => onSuccess('FeedMe'), onError })
+
+    calculateGas(payload)
+      .then((res) => res.toHuman())
+      .then(({ min_limit }) => {
+        const minLimit = withoutCommas(min_limit as string)
+        const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+        checkBalance(
+          gasLimit,
+          () => {
+            send({
+              payload,
+              gasLimit,
+              onSuccess: () => onSuccess('FeedMe'),
+              onError,
+            })
+          },
+          onError
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+        onError()
+      })
   }
   const playHandler = () => {
+    const payload = { Play: null }
+
     setIsPending(true)
-    send(
-      { Play: null },
-      {
-        onSuccess: () => onSuccess('PlayWithMe'),
-        onError,
-      }
-    )
+
+    calculateGas(payload)
+      .then((res) => res.toHuman())
+      .then(({ min_limit }) => {
+        const minLimit = withoutCommas(min_limit as string)
+        const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+        checkBalance(
+          gasLimit,
+          () => {
+            send({
+              payload,
+              gasLimit,
+              onSuccess: () => onSuccess('PlayWithMe'),
+              onError,
+            })
+          },
+          onError
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+        onError()
+      })
   }
   const sleepHandler = () => {
+    const payload = { Sleep: null }
+
     setIsPending(true)
-    send(
-      { Sleep: null },
-      {
-        onSuccess: () => onSuccess('WantToSleep'),
-        onError,
-      }
-    )
+
+    calculateGas(payload)
+      .then((res) => res.toHuman())
+      .then(({ min_limit }) => {
+        const minLimit = withoutCommas(min_limit as string)
+        const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+        checkBalance(
+          gasLimit,
+          () => {
+            send({
+              payload,
+              gasLimit,
+              onSuccess: () => onSuccess('WantToSleep'),
+              onError,
+            })
+          },
+          onError
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+        onError()
+      })
   }
 
   return (
