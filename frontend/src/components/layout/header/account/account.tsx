@@ -8,10 +8,12 @@ import { TokensWallet } from '@/components/common/tokens-wallet'
 import { GasWallet } from '@/components/common/gas-wallet'
 import { AccountButton } from '@/components/common/account-button'
 import { SelectAccountPopup } from '@/components/popups/select-account-popup'
+import { useAccountAvailableBalance } from '@/app/hooks/use-account-available-balance'
 
 export const AccountComponent = () => {
   const { lesson, isAdmin } = useLessons()
   const { account, accounts } = useAccount()
+  const { availableBalance } = useAccountAvailableBalance()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { pathname } = useLocation()
@@ -37,7 +39,7 @@ export const AccountComponent = () => {
             </>
           )}
           <GasWallet
-            balance={account.balance}
+            balance={availableBalance}
             address={account.address}
             name={account.meta.name}
             onClick={openModal}

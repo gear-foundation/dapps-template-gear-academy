@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useReadWasmState, withoutCommas } from '@gear-js/react-hooks'
 import { useLessons, useTamagotchi } from '@/app/context'
-import { useStateMetadata } from './use-metadata'
+import { useProgramMetadata, useStateMetadata } from './use-metadata'
 import { sleep } from '@/app/utils'
 import type { TamagotchiState } from '@/app/types/lessons'
 import state2 from '@/assets/meta/state2.meta.wasm?url'
@@ -15,13 +15,15 @@ type StateWasmResponse = {
 export function useThrottleWasmState() {
   const { lesson, setIsReady, isReady } = useLessons()
   const metadata = useStateMetadata(state2)
+  const programMeta = useProgramMetadata(state2)
   const { tamagotchi, setTamagotchi } = useTamagotchi()
 
-  const { state } = useReadWasmState<StateWasmResponse>(
-    lesson?.programId,
-    metadata?.buffer,
-    'current_state'
-  )
+  const { state } = useReadWasmState<StateWasmResponse>({
+    programId: lesson?.programId,
+    wasm: metadata?.buffer,
+    programMetadata: programMeta,
+    functionName: 'current_state',
+  })
 
   useEffect(() => {
     if (lesson && lesson.step < 2) return
