@@ -2193,7 +2193,7 @@ dependencies = [
  "dirs",
  "gear-core",
  "gear-wasm-instrument",
- "gmeta",
+ "gmeta 1.0.2",
  "log",
  "once_cell",
  "pathdiff",
@@ -2292,6 +2292,17 @@ checksum = "8be18de09a56b60ed0edf84bc9df007e30040691af7acd1c41874faac5895bfb"
 name = "gmeta"
 version = "1.0.2"
 source = "git+https://github.com/gear-tech/gear?tag=v1.0.2#d02d306f97c2d60c1a8786366a56d8c02264f4e1"
+dependencies = [
+ "blake2-rfc",
+ "derive_more",
+ "hex",
+ "scale-info",
+]
+
+[[package]]
+name = "gmeta"
+version = "1.0.3"
+source = "git+https://github.com/gear-tech/gear?tag=v1.0.3#2d05b4497f293a8ea14c956566f688dbd095fcae"
 dependencies = [
  "blake2-rfc",
  "derive_more",
@@ -4691,7 +4702,7 @@ name = "sharded-fungible-token-io"
 version = "1.0.2"
 source = "git+https://github.com/gear-foundation/dapps?tag=v1.0.2#32e1f4d84636f5f27005ea2cf66b1eb5ed124dec"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.2",
  "gstd",
  "primitive-types",
 ]
@@ -4716,7 +4727,7 @@ name = "sharded-fungible-token-logic-io"
 version = "1.0.2"
 source = "git+https://github.com/gear-foundation/dapps?tag=v1.0.2#32e1f4d84636f5f27005ea2cf66b1eb5ed124dec"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.2",
  "gstd",
  "primitive-types",
  "sharded-fungible-token-io",
@@ -4739,7 +4750,7 @@ name = "sharded-fungible-token-storage-io"
 version = "1.0.2"
 source = "git+https://github.com/gear-foundation/dapps?tag=v1.0.2#32e1f4d84636f5f27005ea2cf66b1eb5ed124dec"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.2",
  "gstd",
  "primitive-types",
 ]
@@ -5486,7 +5497,7 @@ dependencies = [
 name = "store-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
@@ -5668,7 +5679,7 @@ dependencies = [
 name = "tamagotchi-army-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
@@ -5685,7 +5696,7 @@ dependencies = [
 name = "tamagotchi-auto-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
@@ -5703,7 +5714,7 @@ dependencies = [
 name = "tamagotchi-interaction-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
@@ -5711,7 +5722,7 @@ dependencies = [
 name = "tamagotchi-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
@@ -5729,7 +5740,7 @@ dependencies = [
 name = "tamagotchi-nft-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
@@ -5746,7 +5757,7 @@ dependencies = [
 name = "tamagotchi-shop-io"
 version = "0.3.3"
 dependencies = [
- "gmeta",
+ "gmeta 1.0.3",
  "gstd",
 ]
 
