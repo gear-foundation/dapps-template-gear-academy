@@ -25,7 +25,7 @@ gear-core = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 gear-wasm-builder = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 gmeta = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 gsdk = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
-gstd = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gstd = { git = "https://github.com/gear-tech/gear", tag = "v1.0.4" }
 gtest = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 
 sharded-fungible-token-io = { git = "https://github.com/gear-foundation/dapps", tag = "v1.0.2" }
