@@ -27,13 +27,13 @@ extern fn init() {
     let tamagotchi = Tamagotchi {
         name: name.clone(),
         date_of_birth: exec::block_timestamp(),
-        owner: Default::default(),
+        owner: msg::source(),
         fed: 1,
-        fed_block: 0,
+        fed_block: exec::block_height() as u64,
         entertained: 1,
-        entertained_block: 0,
+        entertained_block: exec::block_height() as u64,
         slept: 1,
-        slept_block: 0,
+        slept_block: exec::block_height() as u64
     };
 
     unsafe {
@@ -61,21 +61,21 @@ extern fn handle() {
             msg::reply(TmgEvent::Age(tmg.date_of_birth.clone()), 0).expect("Age not loaded correctly");
         }
         TmgAction::Feed => {
-            tmg.fed_block = exec::block_timestamp();
-            tmg.fed -= exec::block_height() as u64 * HUNGER_PER_BLOCK;
+            tmg.fed -= (exec::block_height() as u64 - tmg.fed_block) * HUNGER_PER_BLOCK;
             tmg.fed += FILL_PER_FEED;
+            tmg.fed_block = exec::block_height() as u64;
             msg::reply(TmgEvent::Fed, 0).expect("Not fed correctly");
         }
         TmgAction::Entertain => {
-            tmg.entertained_block = exec::block_timestamp();
-            tmg.entertained -= exec::block_height() as u64 * BOREDOM_PER_BLOCK;
+            tmg.entertained -= (exec::block_height() as u64 - tmg.entertained_block) * BOREDOM_PER_BLOCK;
             tmg.entertained += FILL_PER_ENTERTAINMENT;
+            tmg.entertained_block = exec::block_height() as u64;
             msg::reply(TmgEvent::Entertained, 0).expect("Not entertained correctly");
         }
         TmgAction::Sleep => {
-            tmg.slept_block = exec::block_timestamp();
-            tmg.slept -= exec::block_height() as u64 * ENERGY_PER_BLOCK;
+            tmg.slept -= (tmg.slept_block - exec::block_height() as u64) * ENERGY_PER_BLOCK;
             tmg.slept_block += FILL_PER_SLEEP;
+            tmg.slept_block = exec::block_height() as u64;
             msg::reply(TmgEvent::Slept, 0).expect("Not slept correctly");
         }
     }
