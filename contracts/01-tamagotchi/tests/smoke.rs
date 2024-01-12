@@ -1,4 +1,5 @@
-use gtest::{Program, System};
+use gtest::{Program, System, Log};
+use tamagotchi_io::*;
 
 #[test]
 fn smoke_test() {
@@ -6,5 +7,12 @@ fn smoke_test() {
     sys.init_logger();
     let _program = Program::current(&sys);
 
-    // TODO: 8️⃣ Test the program initialization and message handling
+    _program.send(2, String::from("Heriel"));
+
+    let _res = _program.send(2, TmgAction::Name);
+    let expected_log = Log::builder()
+    .dest(2)
+    .payload(TmgEvent::Name("Heriel".to_string()));
+    assert!(_res.contains(&expected_log));
+
 }
