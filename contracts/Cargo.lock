@@ -198,7 +198,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ca33f4bc4ed1babef42cad36cc1f51fa88be00420404e5b1e80ab1b18f7678c"
 dependencies = [
  "concurrent-queue",
- "event-listener 4.0.0",
+ "event-listener 4.0.3",
  "event-listener-strategy",
  "futures-core",
  "pin-project-lite",
@@ -210,11 +210,11 @@ version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "17ae5ebefcc48e7452b4987947920dac9450be1110cadf34d1b8c116bdbaf97c"
 dependencies = [
- "async-lock 3.1.2",
+ "async-lock 3.3.0",
  "async-task",
  "concurrent-queue",
  "fastrand 2.0.1",
- "futures-lite 2.0.1",
+ "futures-lite 2.2.0",
  "slab",
 ]
 
@@ -252,15 +252,15 @@ dependencies = [
 
 [[package]]
 name = "async-io"
-version = "2.2.1"
+version = "2.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d6d3b15875ba253d1110c740755e246537483f152fa334f91abd7fe84c88b3ff"
+checksum = "6afaa937395a620e33dc6a742c593c01aced20aa376ffb0f628121198578ccc7"
 dependencies = [
- "async-lock 3.1.2",
+ "async-lock 3.3.0",
  "cfg-if",
  "concurrent-queue",
  "futures-io",
- "futures-lite 2.0.1",
+ "futures-lite 2.2.0",
  "parking",
  "polling 3.3.1",
  "rustix 0.38.15",
@@ -280,11 +280,11 @@ dependencies = [
 
 [[package]]
 name = "async-lock"
-version = "3.1.2"
+version = "3.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dea8b3453dd7cc96711834b75400d671b73e3656975fa68d9f277163b7f7e316"
+checksum = "d034b430882f8381900d3fe6f0aaa3ad94f2cb4ac519b429692a1bc2dda4ae7b"
 dependencies = [
- "event-listener 4.0.0",
+ "event-listener 4.0.3",
  "event-listener-strategy",
  "pin-project-lite",
 ]
@@ -323,7 +323,7 @@ version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e47d90f65a225c4527103a8d747001fc56e375203592b25ad103e1ca13124c5"
 dependencies = [
- "async-io 2.2.1",
+ "async-io 2.2.2",
  "async-lock 2.8.0",
  "atomic-waker",
  "cfg-if",
@@ -337,9 +337,9 @@ dependencies = [
 
 [[package]]
 name = "async-task"
-version = "4.5.0"
+version = "4.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4eb2cdb97421e01129ccb49169d8279ed21e829929144f4a22a6e54ac549ca1"
+checksum = "fbb36e985947064623dbd357f727af08ffd077f93d696782f3c56365fa2e2799"
 
 [[package]]
 name = "async-trait"
@@ -561,11 +561,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6a37913e8dc4ddcc604f0c6d3bf2887c995153af3611de9e23c352b44c1b9118"
 dependencies = [
  "async-channel 2.1.1",
- "async-lock 3.1.2",
+ "async-lock 3.3.0",
  "async-task",
  "fastrand 2.0.1",
  "futures-io",
- "futures-lite 2.0.1",
+ "futures-lite 2.2.0",
  "piper",
  "tracing",
 ]
@@ -777,18 +777,18 @@ dependencies = [
 
 [[package]]
 name = "concurrent-queue"
-version = "2.3.0"
+version = "2.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f057a694a54f12365049b0958a1685bb52d567f5593b355fbf685838e873d400"
+checksum = "d16048cd947b08fa32c24458a22f5dc5e835264f689f4f5653210c69fd107363"
 dependencies = [
  "crossbeam-utils",
 ]
 
 [[package]]
 name = "const-oid"
-version = "0.9.5"
+version = "0.9.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28c122c3980598d243d63d9a704629a2d748d101f278052ff068be5a4423ab6f"
+checksum = "c2459377285ad874054d797f3ccebf984978aa39129f6eafde5cdc8315b612f8"
 
 [[package]]
 name = "constant_time_eq"
@@ -1532,9 +1532,9 @@ dependencies = [
 
 [[package]]
 name = "event-listener"
-version = "4.0.0"
+version = "4.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "770d968249b5d99410d61f5bf89057f3199a077a04d087092f58e7d10692baae"
+checksum = "67b215c49b2b248c855fb73579eb1f4f26c38ffdc12973e20e07b91d78d5646e"
 dependencies = [
  "concurrent-queue",
  "parking",
@@ -1547,7 +1547,7 @@ version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "958e4d70b6d5e81971bebec42271ec641e7ff4e170a6fa605f2b8a8b65cb97d3"
 dependencies = [
- "event-listener 4.0.0",
+ "event-listener 4.0.3",
  "pin-project-lite",
 ]
 
@@ -1661,7 +1661,7 @@ dependencies = [
 [[package]]
 name = "frame-support"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "bitflags 1.3.2",
  "environmental",
@@ -1694,7 +1694,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "Inflector",
  "cfg-expr",
@@ -1709,7 +1709,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural-tools"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "frame-support-procedural-tools-derive",
  "proc-macro-crate",
@@ -1721,7 +1721,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural-tools-derive"
 version = "3.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1809,14 +1809,13 @@ dependencies = [
 
 [[package]]
 name = "futures-lite"
-version = "2.0.1"
+version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d3831c2651acb5177cbd83943f3d9c8912c5ad03c76afcc0e9511ba568ec5ebb"
+checksum = "445ba825b27408685aaecefd65178908c36c6e96aaf6d8599419d46e624192ba"
 dependencies = [
  "fastrand 2.0.1",
  "futures-core",
  "futures-io",
- "memchr",
  "parking",
  "pin-project-lite",
 ]
@@ -3702,9 +3701,9 @@ checksum = "26072860ba924cbfa98ea39c8c19b4dd6a4a25423dbdf219c1eca91aa0cf6964"
 
 [[package]]
 name = "platforms"
-version = "3.2.0"
+version = "3.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14e6ab3f592e6fb464fc9712d8d6e6912de6473954635fd76a589d832cffcbb0"
+checksum = "626dec3cac7cc0e1577a2ec3fc496277ec2baa084bebad95bb6fdbfae235f84c"
 
 [[package]]
 name = "polling"
@@ -4293,7 +4292,7 @@ checksum = "1ad4cc8da4ef723ed60bced201181d83791ad433213d8c24efffda1eec85d741"
 [[package]]
 name = "sc-executor-common"
 version = "0.10.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "sp-allocator",
  "sp-maybe-compressed-blob",
@@ -4951,7 +4950,7 @@ dependencies = [
 [[package]]
 name = "sp-allocator"
 version = "4.1.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "log",
  "parity-scale-codec",
@@ -4962,7 +4961,7 @@ dependencies = [
 [[package]]
 name = "sp-api"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "hash-db",
  "log",
@@ -4980,7 +4979,7 @@ dependencies = [
 [[package]]
 name = "sp-api-proc-macro"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "Inflector",
  "blake2",
@@ -4994,7 +4993,7 @@ dependencies = [
 [[package]]
 name = "sp-application-crypto"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -5007,7 +5006,7 @@ dependencies = [
 [[package]]
 name = "sp-arithmetic"
 version = "6.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "integer-sqrt",
  "num-traits",
@@ -5021,7 +5020,7 @@ dependencies = [
 [[package]]
 name = "sp-core"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "array-bytes",
  "base58",
@@ -5065,7 +5064,7 @@ dependencies = [
 [[package]]
 name = "sp-core-hashing"
 version = "5.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "blake2b_simd",
  "byteorder",
@@ -5108,7 +5107,7 @@ dependencies = [
 [[package]]
 name = "sp-core-hashing-proc-macro"
 version = "5.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5119,7 +5118,7 @@ dependencies = [
 [[package]]
 name = "sp-debug-derive"
 version = "5.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5129,7 +5128,7 @@ dependencies = [
 [[package]]
 name = "sp-externalities"
 version = "0.13.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "environmental",
  "parity-scale-codec",
@@ -5140,7 +5139,7 @@ dependencies = [
 [[package]]
 name = "sp-inherents"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "async-trait",
  "impl-trait-for-tuples",
@@ -5155,7 +5154,7 @@ dependencies = [
 [[package]]
 name = "sp-io"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "bytes",
  "ed25519",
@@ -5180,7 +5179,7 @@ dependencies = [
 [[package]]
 name = "sp-keystore"
 version = "0.13.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "async-trait",
  "futures",
@@ -5196,7 +5195,7 @@ dependencies = [
 [[package]]
 name = "sp-maybe-compressed-blob"
 version = "4.1.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "thiserror",
  "zstd",
@@ -5205,7 +5204,7 @@ dependencies = [
 [[package]]
 name = "sp-panic-handler"
 version = "5.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "backtrace",
  "lazy_static",
@@ -5215,7 +5214,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "either",
  "hash256-std-hasher",
@@ -5237,7 +5236,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "bytes",
  "impl-trait-for-tuples",
@@ -5255,7 +5254,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface-proc-macro"
 version = "6.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "Inflector",
  "proc-macro-crate",
@@ -5267,7 +5266,7 @@ dependencies = [
 [[package]]
 name = "sp-staking"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -5279,7 +5278,7 @@ dependencies = [
 [[package]]
 name = "sp-state-machine"
 version = "0.13.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "hash-db",
  "log",
@@ -5299,7 +5298,7 @@ dependencies = [
 [[package]]
 name = "sp-std"
 version = "5.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 
 [[package]]
 name = "sp-std"
@@ -5310,7 +5309,7 @@ checksum = "53458e3c57df53698b3401ec0934bea8e8cfce034816873c0b0abbd83d7bac0d"
 [[package]]
 name = "sp-storage"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
@@ -5323,7 +5322,7 @@ dependencies = [
 [[package]]
 name = "sp-tracing"
 version = "6.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "parity-scale-codec",
  "sp-std 5.0.0",
@@ -5335,7 +5334,7 @@ dependencies = [
 [[package]]
 name = "sp-trie"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "ahash 0.8.3",
  "hash-db",
@@ -5358,7 +5357,7 @@ dependencies = [
 [[package]]
 name = "sp-version"
 version = "5.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
@@ -5375,7 +5374,7 @@ dependencies = [
 [[package]]
 name = "sp-version-proc-macro"
 version = "4.0.0-dev"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "parity-scale-codec",
  "proc-macro2",
@@ -5386,7 +5385,7 @@ dependencies = [
 [[package]]
 name = "sp-wasm-interface"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "anyhow",
  "impl-trait-for-tuples",
@@ -5401,7 +5400,7 @@ dependencies = [
 [[package]]
 name = "sp-wasm-interface-common"
 version = "7.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "parity-scale-codec",
  "sp-std 5.0.0",
@@ -5411,7 +5410,7 @@ dependencies = [
 [[package]]
 name = "sp-weights"
 version = "4.0.0"
-source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#27779e0eaaa2161ba165ff8f0b0ff103bb63e5a1"
+source = "git+https://github.com/gear-tech/substrate.git?branch=gear-polkadot-v0.9.41-canary-no-sandbox-revert-oom-changes#9aa124f32c4cb05f5b032be0da02092245cfb6ba"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -5879,9 +5878,9 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 
 [[package]]
 name = "tokio"
-version = "1.33.0"
+version = "1.32.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f38200e3ef7995e5ef13baec2f432a6da0aa9ac495b2c0e8f3b7eec2c92d653"
+checksum = "17ed6077ed6cd6c74735e21f37eb16dc3935f96878b1fe961074089cc80893f9"
 dependencies = [
  "backtrace",
  "bytes",
