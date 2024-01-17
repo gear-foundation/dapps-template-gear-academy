@@ -5686,6 +5686,8 @@ version = "0.3.3"
 dependencies = [
  "gmeta",
  "gstd",
+ "sharded-fungible-token-io",
+ "store-io",
 ]
 
 [[package]]
