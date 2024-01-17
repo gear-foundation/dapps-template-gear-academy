@@ -1,5 +1,4 @@
-import { AlertContainerFactory } from '@gear-js/react-hooks'
-import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
+import { Account, AlertContainerFactory } from '@gear-js/react-hooks'
 import { HexString } from '@polkadot/util/types'
 import {
   NotificationResponseTypes,
@@ -45,7 +44,7 @@ export const copyToClipboard = async (
     unsecuredCopyToClipboard(key)
   }
 }
-export const isLoggedIn = ({ address }: InjectedAccountWithMeta) =>
+export const isLoggedIn = ({ address }: Account) =>
   localStorage[LOCAL_STORAGE.ACCOUNT] === address
 
 export const getNotificationTypeValue = (

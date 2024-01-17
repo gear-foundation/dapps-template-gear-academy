@@ -20,18 +20,16 @@ members = [
 ]
 
 [workspace.dependencies]
-gclient = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
-gear-core = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
-gear-wasm-builder = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
-gmeta = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
-gsdk = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
-gstd = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
-gtest = { git = "https://github.com/gear-tech/gear", tag = "v0.3.3" }
+gclient = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gear-core = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gmeta = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gsdk = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gstd = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gtest = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 
-sharded-fungible-token-io = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
-sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
-sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
-sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps", rev = "a62a400" }
+
+sharded-fungible-token-io = { git = "https://github.com/gear-foundation/dapps", tag = "v1.0.2" }
 tamagotchi-io.path = "01-tamagotchi/io"
 tamagotchi-interaction-io.path = "02-tamagotchi-interaction/io"
 tamagotchi-nft-io.path = "03-tamagotchi-nft/io"
@@ -44,4 +42,7 @@ tokio = "1"
 
 # External binaries
 
+sharded-fungible-token = { git = "https://github.com/gear-foundation/dapps", tag = "v1.0.2" }
+sharded-fungible-token-logic = { git = "https://github.com/gear-foundation/dapps", tag = "v1.0.2" }
+sharded-fungible-token-storage = { git = "https://github.com/gear-foundation/dapps", tag = "v1.0.2" }
 

@@ -8,12 +8,16 @@ import { SpriteIcon } from '@/components/ui/sprite-icon'
 import { Button } from '@gear-js/ui'
 import { PaymentErrorPopup } from '@/components/popups/payment-error-popup'
 import { withoutCommas } from '@gear-js/react-hooks'
+import { useHandleCalculateGas } from '@/app/hooks/use-handle-calculate-gas'
+import { useCheckBalance } from '@/app/hooks/use-check-balance'
 
 export const StoreItemCard = ({ item }: { item: StoreItemType }) => {
   const { id, amount, description, isBought } = item
   const [open, setOpen] = useState(false)
   const { balance } = useGetFTBalance()
-  const sendHandler = useTamagotchiMessage()
+  const { send: sendHandler, lessonMeta } = useTamagotchiMessage()
+  const calculateGas = useHandleCalculateGas(ENV.battle, lessonMeta)
+  const { checkBalance } = useCheckBalance()
   const { setIsPending, isPending } = useApp()
 
   const onError = () => setIsPending(false)
@@ -21,17 +25,41 @@ export const StoreItemCard = ({ item }: { item: StoreItemType }) => {
 
   const handler = (amount: number) => {
     if (+balance >= amount) {
-      setIsPending((prev) => !prev)
-      sendHandler(
-        {
-          BuyAttribute: {
-            storeId: ENV.store,
-            attribute_id: id,
-          },
+      const payload = {
+        BuyAttribute: {
+          storeId: ENV.store,
+          attribute_id: id,
         },
-        { onError, onSuccess }
-      )
-    } else setOpen(true)
+      }
+
+      setIsPending((prev) => !prev)
+
+      calculateGas(payload)
+        .then((res) => res.toHuman())
+        .then(({ min_limit }) => {
+          const minLimit = withoutCommas(min_limit as string)
+          const gasLimit = Math.floor(Number(minLimit) + Number(minLimit) * 0.2)
+
+          checkBalance(
+            gasLimit,
+            () => {
+              sendHandler({
+                payload,
+                gasLimit,
+                onError,
+                onSuccess,
+              })
+            },
+            onError
+          )
+        })
+        .catch((error) => {
+          console.log(error)
+          onError()
+        })
+    } else {
+      setOpen(true)
+    }
   }
 
   return (

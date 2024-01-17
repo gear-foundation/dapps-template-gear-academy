@@ -5,10 +5,25 @@ import { Routing } from './pages'
 import { ApiLoader } from './components/loaders/api-loader'
 import { Footer, Header } from '@/components/layout'
 import { withProviders } from '@/app/hocs'
+import { useAccountAvailableBalanceSync } from './app/hooks/use-account-available-balance'
+import { useEffect } from 'react'
+import { ENV } from './app/consts'
 
 const Component = () => {
   const { isApiReady } = useApi()
   const { isAccountReady } = useAccount()
+
+  useAccountAvailableBalanceSync()
+
+  useEffect(() => {
+    console.log('Node')
+    console.log(ENV.NODE)
+    console.log('store')
+    console.log(ENV.store)
+    console.log('battle')
+    console.log(ENV.battle)
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

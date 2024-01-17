@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  getProgramMetadata,
-  getStateMetadata,
-  ProgramMetadata,
-  StateMetadata,
-} from '@gear-js/api'
+import { getStateMetadata, ProgramMetadata, StateMetadata } from '@gear-js/api'
 import { Buffer } from 'buffer'
 import { useAlert, useReadFullState } from '@gear-js/react-hooks'
 import { HexString } from '@polkadot/util/types'
@@ -17,8 +12,7 @@ export function useProgramMetadata(source: string) {
   useEffect(() => {
     fetch(source)
       .then((response) => response.text())
-      .then((raw) => `0x${raw}` as HexString)
-      .then((metaHex) => getProgramMetadata(metaHex))
+      .then((raw) => ProgramMetadata.from(`0x${raw}`))
       .then((result) => setMetadata(result))
       .catch(({ message }: Error) => alert.error(message))
 
@@ -61,5 +55,5 @@ export function useReadState<T>({
   meta: string
 }) {
   const metadata = useProgramMetadata(meta)
-  return useReadFullState<T>(programId, metadata)
+  return useReadFullState<T>(programId, metadata, '0x')
 }

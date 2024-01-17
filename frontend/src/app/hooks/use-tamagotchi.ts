@@ -11,7 +11,7 @@ import type { TamagotchiState } from '@/app/types/lessons'
 
 export function useReadTamagotchi<T>() {
   const { lesson, lessonMeta } = useLessons()
-  return useReadFullState<T>(lesson?.programId, lessonMeta)
+  return useReadFullState<T>(lesson?.programId, lessonMeta, '0x')
 }
 
 export function useTamagotchiInit() {
@@ -58,5 +58,8 @@ export function useTamagotchiInit() {
 
 export function useTamagotchiMessage() {
   const { lesson, lessonMeta } = useLessons()
-  return useSendMessage(lesson?.programId as HexString, lessonMeta)
+  return {
+    lessonMeta,
+    send: useSendMessage(lesson?.programId as HexString, lessonMeta),
+  }
 }
