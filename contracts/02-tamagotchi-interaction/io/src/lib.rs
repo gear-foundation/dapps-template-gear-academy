@@ -1,39 +1,44 @@
 #![no_std]
 
-use gmeta::Metadata;
+use codec::{Decode, Encode};
+use gmeta::{Metadata, InOut, In, Out};
 use gstd::prelude::*;
+use scale_info::TypeInfo;
 
 #[derive(Default, Encode, Decode, TypeInfo)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Tamagotchi {
-    // TODO: 0️⃣ Copy fields from previous lesson and push changes to the master branch
-    // TODO: 1️⃣ Add new fields
+    // TODO: 1️⃣ Add `name` and `age` fields
+    pub name: String,
+    pub date_of_birth: u64,
 }
 
 #[derive(Encode, Decode, TypeInfo)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub enum TmgAction {
-    // TODO: 0️⃣ Copy actions from previous lesson and push changes to the master branch
-    // TODO: 2️⃣ Add new actions
+    // TODO: 2️⃣ Add `Name` and `Age` actions that set the name and age
+    Name,
+    Age,
 }
 
 #[derive(Encode, Decode, TypeInfo)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub enum TmgEvent {
-    // TODO: 0️⃣ Copy events from previous lesson and push changes to the master branch
-    // TODO: 3️⃣ Add new events
+    // TODO: 3️⃣ Add `Name` and `Age` events that return the name and age
+    Name(String),
+    Age(u64),
 }
 
 pub struct ProgramMetadata;
 
-// TODO: 0️⃣ Copy `Metadata` from the first lesson and push changes to the master branch
+// TODO: 4️⃣ Fill `Init`, `Handle`, and `State` types
 impl Metadata for ProgramMetadata {
-    type Init = ();
-    type Handle = ();
-    type State = ();
+    type Init = In<String>;
+    type Handle = InOut<TmgAction, TmgEvent>;
+    type State = Out<Tamagotchi>;
     type Reply = ();
     type Others = ();
     type Signal = ();
