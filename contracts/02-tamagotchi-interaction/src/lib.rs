@@ -78,3 +78,4 @@ extern fn state() {
     let tmg = unsafe { TAMAGOTCHI.take().expect("Unexpected error in taking state") };
     msg::reply(tmg, 0).expect("Failed to share state");
 }
+
