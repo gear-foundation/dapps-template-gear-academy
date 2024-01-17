@@ -8,6 +8,8 @@ publish.workspace = true
 [dependencies]
 gstd.workspace = true
 tamagotchi-shop-io.workspace = true
+sharded-fungible-token-io.workspace = true
+store-io.workspace = true
 
 [build-dependencies]
 gear-wasm-builder.workspace = true
