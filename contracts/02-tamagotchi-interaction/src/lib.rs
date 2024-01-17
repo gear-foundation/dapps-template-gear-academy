@@ -41,7 +41,7 @@ extern fn handle() {
     // TODO: 5️⃣ Add new logic for calculating the `fed`, `entertained` and `slept` levels
     let action: TmgAction = msg::load().expect("unable to load action");
     let tmg = unsafe { TAMAGOTCHI.as_mut().expect("TAMAGOTCHI is not initialized") };
-    
+
     match action {
         TmgAction::Name => {
             msg::reply(TmgEvent::Name(tmg.name.clone()), 0)
@@ -78,4 +78,3 @@ extern fn state() {
     let tmg = unsafe { TAMAGOTCHI.take().expect("Unexpected error in taking state") };
     msg::reply(tmg, 0).expect("Failed to share state");
 }
-

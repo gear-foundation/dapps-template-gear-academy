@@ -25,7 +25,7 @@ extern fn handle() {
     // TODO: 6️⃣ Add handling of `Name` and `Age` actions
     let action: TmgAction = msg::load().expect("unable to load action");
     let tmg = unsafe { TAMAGOTCHI.as_mut().expect("TAMAGOTCHI is not initialized") };
-    
+
     match action {
         TmgAction::Name => {
             msg::reply(TmgEvent::Name(tmg.name.clone()), 0)
