@@ -17,6 +17,11 @@ pub const FILL_PER_SLEEP: u64 = 1000;
 pub const FILL_PER_FEED: u64 = 1000;
 pub const FILL_PER_ENTERTAINMENT: u64 = 1000;
 
+pub struct GasReservationHandlers {
+    pub contract_send_a_delayed_message: bool,
+    pub can_send_delayed_message: bool
+}
+
 #[derive(Default, Encode, Decode, TypeInfo)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
@@ -172,39 +177,48 @@ impl Tamagotchi {
         self.reservations.push(reservation_id);
     }
     
-    pub fn send_message(&mut self, payload: TmgEvent) {
-        let caller = msg::source();
-        
-        // send to the caller the message with given payload
-        // this prevent the use of the gas reservation
-        if caller != exec::program_id() {
-            msg::reply(payload, 0)
-                .expect("Error sending reply");
-            return;
-        }
-        
-        // if caller is the contract, get a reservation id
+    pub fn check_state_of_tamagotchi(&mut self) {
         let Some(reservation_id) = self.reservations.pop() else {
-            return;
+            panic!("Error getting reservation id"); 
         };
         
-        if self.reservations.is_empty() {
-            msg::send_from_reservation(
-                reservation_id, 
-                self.owner, 
-                TmgEvent::MakeReservation, 
-                0
-            ).expect("Failed to send message with reservation");
-            return;
-        }
-        
-        // Send to the owner the message with gas reservation
-        msg::send_from_reservation(
+        msg::send_delayed_from_reservation(
             reservation_id, 
+            exec::program_id(), 
+            TmgAction::CheckState, 
+            0,
+            DELAY_OF_ONE_MINUTE
+        ).expect("Error sending message from reservation");
+    }
+    
+    pub fn send_delayed_message_with_reservation_to_owner(&mut self, payload: TmgEvent) {
+        self.send_delayed_message_from_reservation(
             self.owner, 
+            payload,
+            DELAY_OF_ONE_MINUTE
+        );
+    }
+    
+    pub fn send_delayed_make_reservation_message_to_owner(&mut self) {
+        self.send_delayed_message_from_reservation(
+            self.owner, 
+            TmgEvent::MakeReservation,
+            DELAY_OF_ONE_MINUTE
+        );
+    }
+    
+    pub fn send_delayed_message_from_reservation(&mut self, to: ActorId, payload: TmgEvent, delay: u32) {
+        let Some(reservation_id) = self.reservations.pop() else {
+            panic!("Error getting reservation id"); 
+        };
+        
+        msg::send_delayed_from_reservation(
+            reservation_id, 
+            to, 
             payload, 
-            0
-        ).expect("Failed to send message with reservation");
+            0,
+            delay
+        ).expect("Error sending message from reservation");
     }
 }
 
@@ -262,6 +276,7 @@ pub enum TmgEvent {
     FeedMe,
     PlayWithMe,
     WantToSleep,
+    AllGood, // extra field to return if the user check state
     MakeReservation,
     GasReserved,
 }
@@ -272,7 +287,7 @@ pub struct ProgramMetadata;
 impl Metadata for ProgramMetadata {
     type Init = In<String>;
     type Reply = ();
-    type Others = ();
+    type Others = InOut<TmgAction, TmgEvent>;
     type Signal = ();
     type Handle = InOut<TmgAction, TmgEvent>;
     type State = Out<Tamagotchi>;
@@ -284,7 +299,7 @@ pub fn blocks_height() -> u64 {
 
 pub fn updated_field_value(field: u64, field_block: u64, value_per_block: u64, blocks_height: u64) -> u64 {
     let total_value_to_rest = (blocks_height - field_block) * value_per_block;
-    if field >= total_value_to_rest {
+    if field > total_value_to_rest {
         // If the given value of the tamagotchi is greater than the value to be 
         // subtracted after a certain number of blocks, the update value is
         // returned
