@@ -1,7 +1,7 @@
 #![no_std]
 
 use codec::{Decode, Encode};
-use gmeta::Metadata;
+use gmeta::{In, InOut, Metadata, Out};
 use gstd::prelude::*;
 use scale_info::TypeInfo;
 

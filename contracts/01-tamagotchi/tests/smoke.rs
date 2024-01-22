@@ -4,7 +4,10 @@ use gtest::{Program, System};
 fn smoke_test() {
     let sys = System::new();
     sys.init_logger();
-    let _program = Program::current(&sys);
+    let program: Program<'_> = Program::current(&sys);
 
-    // TODO: 8️⃣ Test the program initialization and message handling
+    let res = program.send(2, String::from("Ivan"));
+    let res2 = program.send(2, 10);
+    assert!(!res.main_failed());
+
 }
