@@ -5,7 +5,8 @@ use gmeta::{In, InOut, Metadata, Out};
 use gstd::prelude::*;
 use scale_info::TypeInfo;
 
-#[derive(Default, Encode, Decode, TypeInfo)]
+
+#[derive(Default, Encode, Decode, TypeInfo, Debug)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Tamagotchi {

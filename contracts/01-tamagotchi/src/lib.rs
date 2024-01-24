@@ -2,48 +2,60 @@
 
 
 #[allow(unused_imports)]
-use gstd::{ActorId, msg, prelude::*, debug};
-use tamagotchi_io::TmgEvent::Name;
-use tamagotchi_io::TmgEvent::Age;
+use gstd::{ActorId, msg, prelude::*, debug, exec};
+use tamagotchi_io::{Tamagotchi, TmgAction, TmgEvent};
 
-#[derive(Encode, Decode, TypeInfo)]
-#[codec(crate = gstd::codec)]
-#[scale_info(crate = gstd::scale_info)]
-pub enum TmgAction {
-    Name,
-    Age,
-}
-#[derive(Encode, Decode, TypeInfo)]
-#[codec(crate = gstd::codec)]
-#[scale_info(crate = gstd::scale_info)]
-pub enum TmgEvent {
-    // TODO: 3️⃣ Add `Name` and `Age` events that return the name and age
-   Name(String),
-   Age(u64),
-}
 
+static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
 #[no_mangle]
 extern fn init() {
-    let name: String = msg::load().expect("Can't decode an init message");
+    let tamagochi: Tamagotchi = Tamagotchi {
+        name: String::from("Ivan"),
+        date_of_birth: 45,
+    };
+    let init_msg: String = msg::load().expect("Can't decode an init message");
+
+    let tamagotchi = Tamagotchi {
+        name: "Ivan".to_string(),
+        date_of_birth: exec::block_timestamp(),
+    };
+    debug!(
+        "The Tamagotchi Program was initialized with name {:?} and birth date {:?}",
+        tamagotchi.name, tamagotchi.date_of_birth
+    );
+    unsafe { TAMAGOTCHI = Some(tamagotchi) };
+
+   
     debug!("Program was initialized with message {:?}",
-    name);
-    let date_of_birth: u64 = msg::load().expect("Can't decode age message");
+    init_msg);
+    let block = exec::block_timestamp();
+    debug!("Current block timestamp is {}", block);
+   
 }
 
 #[no_mangle]
 extern fn handle() {
     // TODO: 6️⃣ Add handling of `Name` and `Age` actions
-
+    let _tamagotchi = unsafe {
+        TAMAGOTCHI
+            .as_mut()
+            .expect("The contract is not initialized")
+    };
+    
+    let name = &_tamagotchi.name;
+    let current_time = exec::block_timestamp();
+    let age = current_time - _tamagotchi.date_of_birth;
     let action: TmgAction = msg::load().expect("Can't decode an action message");
+    
     // 
 
-    let event = match action {
+    let _event = match action {
         TmgAction::Name => {
-            msg::reply(Name(String::from("Ivan")), 0).expect("Error in sending name");
+            msg::reply(name, 0).expect("Error in sending name");
         }
         TmgAction::Age =>{
-            msg::reply(Age(10), 0).expect("Error in sending age");
+            msg::reply(age, 0).expect("Error in sending age");
            
         } 
     };
@@ -53,4 +65,10 @@ extern fn handle() {
 #[no_mangle]
 extern fn state() {
     // TODO: 7️⃣ Return the Tamagotchi state
+    let tamagotchi = unsafe {
+        TAMAGOTCHI
+            .as_ref()
+            .expect("The contract is not initialized")
+    };
+    msg::reply(tamagotchi, 0).expect("Failed to share state");
 }
