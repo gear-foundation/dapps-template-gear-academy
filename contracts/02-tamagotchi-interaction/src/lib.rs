@@ -1,18 +1,18 @@
 #![no_std]
 
 #[allow(unused_imports)]
-use gstd::prelude::*;
+use gstd::{debug, exec, msg, prelude::*};
 
-use tamagotchi_interaction_io::TmgAction;
-use tamagotchi_io::{Tamagotchi, TmgAction, TmgEvent};
+use tamagotchi_interaction_io::{Tamagotchi, TmgAction, TmgEvent};
+
 
 // TODO: 4️⃣ Define constants
-const HUNGER_PER_BLOCK: u32 = 1;
-const BOREDOM_PER_BLOCK: u32 = 2;
-const ENERGY_PER_BLOCK: u32 = 2;
-const FILL_PER_FEED: u32 = 1000;
-const FILL_PER_ENTERTAINMENT: u32 = 1000;
-const FILL_PER_SLEEP: u32 = 1000;
+const HUNGER_PER_BLOCK: u64 = 1;
+const BOREDOM_PER_BLOCK: u64 = 2;
+const ENERGY_PER_BLOCK: u64 = 2;
+const FILL_PER_FEED: u64 = 1000;
+const FILL_PER_ENTERTAINMENT: u64 = 1000;
+const FILL_PER_SLEEP: u64 = 1000;
 
 static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
@@ -27,11 +27,11 @@ extern fn init() {
         date_of_birth: exec::block_timestamp(),
         owner: msg::source(),
         fed: 1000,
-        fed_block: exec::block_height(),
+        fed_block: exec::block_height().into(),
         entertained: 1000,
-        entertained_block: exec::block_height(),
+        entertained_block: exec::block_height().into(),
         slept: 1000,
-        slept_block: exec::block_height(),
+        slept_block: exec::block_height().into(),
     };
     debug!(
         "The Tamagotchi Program was initialized with name {:?}, birth date {:?}, owner: {:?}",
@@ -66,44 +66,44 @@ extern fn handle() {
            
         } 
         TmgAction::Feed => {
-            let fed = _tamagotchi.fed;
-            let fed_block = _tamagotchi.fed_block;
-            let current_block = exec::block_height();
-            let time_passed = current_block - fed_block;
-            let hunger = time_passed * HUNGER_PER_BLOCK;
-            let current_fed = fed - hunger;
-            let new_fed = current_fed + FILL_PER_FEED;
+            let fed: u64 = _tamagotchi.fed;
+            let fed_block: u64 = _tamagotchi.fed_block;
+            let current_block: u64 = exec::block_height().into();
+            let time_passed: u64 = current_block - fed_block;
+            let hunger: u64 = time_passed * HUNGER_PER_BLOCK;
+            let current_fed:u64  = fed - hunger;
+            let new_fed:u64 = current_fed + FILL_PER_FEED;
            
-            let new_fed_block = current_block;
+            let new_fed_block: u64 = current_block;
             _tamagotchi.fed = new_fed;
             _tamagotchi.fed_block = new_fed_block;
             msg::reply(new_fed, 0).expect("Error in sending fed");
         }
         TmgAction::Entertain => {
-            let entertained = _tamagotchi.entertained;
-           let entertained_block = _tamagotchi.entertained_block;
-            let current_block = exec::block_height();
-            let time_passed = current_block - entertained_block;
-            let boredom = time_passed * BOREDOM_PER_BLOCK;
-            let current_entertained = entertained - boredom;
-            let new_entertained = current_entertained + FILL_PER_ENTERTAINMENT;
+            let entertained: u64 = _tamagotchi.entertained;
+           let entertained_block: u64 = _tamagotchi.entertained_block;
+            let current_block: u64 = exec::block_height().into();
+            let time_passed: u64 = current_block - entertained_block;
+            let boredom: u64 = time_passed * BOREDOM_PER_BLOCK;
+            let current_entertained: u64 = entertained - boredom;
+            let new_entertained: u64 = current_entertained + FILL_PER_ENTERTAINMENT;
 
-            let new_entertained_block = current_block;
+            let new_entertained_block: u64 = current_block;
             _tamagotchi.entertained = new_entertained;
             _tamagotchi.entertained_block = new_entertained_block;
             msg::reply(new_entertained, 0).expect("Error in sending entertained");
             
         }
         TmgAction::Sleep => {
-            let slept = _tamagotchi.slept;
-            let slept_block = _tamagotchi.slept_block;
-            let current_block = exec::block_height();
-            let time_passed = current_block - slept_block;
-            let energy = time_passed * ENERGY_PER_BLOCK;
-            let current_slept = slept - energy;
-            let new_slept = current_slept + FILL_PER_SLEEP;
+            let slept: u64 = _tamagotchi.slept;
+            let slept_block: u64 = _tamagotchi.slept_block;
+            let current_block: u64 = exec::block_height().into();
+            let time_passed: u64 = current_block - slept_block;
+            let energy: u64 = time_passed * ENERGY_PER_BLOCK;
+            let current_slept: u64 = slept - energy;
+            let new_slept: u64 = current_slept + FILL_PER_SLEEP;
 
-            let new_slept_block = current_block;
+            let new_slept_block: u64 = current_block;
             _tamagotchi.slept = new_slept;
             _tamagotchi.slept_block = new_slept_block;
             msg::reply(new_slept, 0).expect("Error in sending slept");

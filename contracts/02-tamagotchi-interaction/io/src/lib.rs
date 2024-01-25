@@ -1,6 +1,6 @@
 #![no_std]
 
-use gstd::{prelude::*, ActorId,exec};
+use gstd::{prelude::*, ActorId};
 use scale_info::TypeInfo;
 use gmeta::{In, InOut, Metadata, Out};
 
@@ -35,10 +35,12 @@ pub enum TmgAction {
     Sleep,
 }
 
-#[derive(Encode, Decode, TypeInfo)]
+#[derive( Encode, Decode, TypeInfo,PartialEq, Eq,)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
+
 pub enum TmgEvent {
+    
     // TODO: 0️⃣ Copy events from previous lesson and push changes to the master branch
     Name(String),
     Age(u64),
