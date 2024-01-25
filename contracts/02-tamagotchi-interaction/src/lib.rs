@@ -34,16 +34,11 @@ extern fn init() {
         slept_block: exec::block_height(),
     };
     debug!(
-        "The Tamagotchi Program was initialized with name {:?} and birth date {:?}",
-        tamagotchi.name, tamagotchi.date_of_birth
+        "The Tamagotchi Program was initialized with name {:?}, birth date {:?}, owner: {:?}",
+        tamagotchi.name, tamagotchi.date_of_birth, tamagotchi.owner
     );
     unsafe { TAMAGOTCHI = Some(tamagotchi) };
 
-   
-    debug!("Program was initialized with message {:?}",
-    init_msg);
-    let block = exec::block_timestamp();
-    debug!("Current block timestamp is {}", block);
 }
 
 #[no_mangle]
@@ -75,12 +70,10 @@ extern fn handle() {
             let fed_block = _tamagotchi.fed_block;
             let current_block = exec::block_height();
             let time_passed = current_block - fed_block;
-            let new_fed = fed + time_passed * HUNGER_PER_BLOCK;
-            let new_fed = if new_fed > 1000 {
-                1000
-            } else {
-                new_fed
-            };
+            let hunger = time_passed * HUNGER_PER_BLOCK;
+            let current_fed = fed - hunger;
+            let new_fed = current_fed + FILL_PER_FEED;
+           
             let new_fed_block = current_block;
             _tamagotchi.fed = new_fed;
             _tamagotchi.fed_block = new_fed_block;
@@ -88,35 +81,33 @@ extern fn handle() {
         }
         TmgAction::Entertain => {
             let entertained = _tamagotchi.entertained;
-            let entertained_block = _tamagotchi.entertained_block;
-            let current_block = exec::block_timestamp();
+           let entertained_block = _tamagotchi.entertained_block;
+            let current_block = exec::block_height();
             let time_passed = current_block - entertained_block;
-            let new_entertained = entertained + time_passed * BOREDOM_PER_BLOCK;
-            let new_entertained = if new_entertained > 1000 {
-                1000
-            } else {
-                new_entertained
-            };
+            let boredom = time_passed * BOREDOM_PER_BLOCK;
+            let current_entertained = entertained - boredom;
+            let new_entertained = current_entertained + FILL_PER_ENTERTAINMENT;
+
             let new_entertained_block = current_block;
             _tamagotchi.entertained = new_entertained;
             _tamagotchi.entertained_block = new_entertained_block;
             msg::reply(new_entertained, 0).expect("Error in sending entertained");
+            
         }
         TmgAction::Sleep => {
             let slept = _tamagotchi.slept;
             let slept_block = _tamagotchi.slept_block;
-            let current_block = exec::block_timestamp();
+            let current_block = exec::block_height();
             let time_passed = current_block - slept_block;
-            let new_slept = slept + time_passed * ENERGY_PER_BLOCK;
-            let new_slept = if new_slept > 1000 {
-                1000
-            } else {
-                new_slept
-            };
+            let energy = time_passed * ENERGY_PER_BLOCK;
+            let current_slept = slept - energy;
+            let new_slept = current_slept + FILL_PER_SLEEP;
+
             let new_slept_block = current_block;
             _tamagotchi.slept = new_slept;
             _tamagotchi.slept_block = new_slept_block;
             msg::reply(new_slept, 0).expect("Error in sending slept");
+        
         }
     };
     // TODO: 5️⃣ Add new logic for calculating the `fed`, `entertained` and `slept` levels

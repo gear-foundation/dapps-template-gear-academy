@@ -8,5 +8,9 @@ fn interaction_test() {
     sys.init_logger();
     let _program = Program::current(&sys);
 
+    let res = program.send(2, String::from("Init Tamagotchi"));
+    
+    assert!(!res.main_failed());
+
     // TODO: 6️⃣ Test new functionality
 }
