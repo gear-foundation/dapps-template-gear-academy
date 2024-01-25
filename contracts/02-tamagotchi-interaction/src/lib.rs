@@ -3,24 +3,35 @@
 #[allow(unused_imports)]
 use gstd::prelude::*;
 
+use tamagotchi_interaction_io::TmgAction;
 use tamagotchi_io::{Tamagotchi, TmgAction, TmgEvent};
 
 // TODO: 4️⃣ Define constants
+const HUNGER_PER_BLOCK: u32 = 1;
+const BOREDOM_PER_BLOCK: u32 = 2;
+const ENERGY_PER_BLOCK: u32 = 2;
+const FILL_PER_FEED: u32 = 1000;
+const FILL_PER_ENTERTAINMENT: u32 = 1000;
+const FILL_PER_SLEEP: u32 = 1000;
 
 static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
 #[no_mangle]
 extern fn init() {
     // TODO: 0️⃣ Copy the `init` function from the previous lesson and push changes to the master branch
-    let tamagochi: Tamagotchi = Tamagotchi {
-        name: String::from("Ivan"),
-        date_of_birth: 45,
-    };
+ 
     let init_msg: String = msg::load().expect("Can't decode an init message");
 
     let tamagotchi = Tamagotchi {
         name: "Ivan".to_string(),
         date_of_birth: exec::block_timestamp(),
+        owner: msg::source(),
+        fed: 1000,
+        fed_block: exec::block_height(),
+        entertained: 1000,
+        entertained_block: exec::block_height(),
+        slept: 1000,
+        slept_block: exec::block_height(),
     };
     debug!(
         "The Tamagotchi Program was initialized with name {:?} and birth date {:?}",
@@ -59,6 +70,54 @@ extern fn handle() {
             msg::reply(age, 0).expect("Error in sending age");
            
         } 
+        TmgAction::Feed => {
+            let fed = _tamagotchi.fed;
+            let fed_block = _tamagotchi.fed_block;
+            let current_block = exec::block_height();
+            let time_passed = current_block - fed_block;
+            let new_fed = fed + time_passed * HUNGER_PER_BLOCK;
+            let new_fed = if new_fed > 1000 {
+                1000
+            } else {
+                new_fed
+            };
+            let new_fed_block = current_block;
+            _tamagotchi.fed = new_fed;
+            _tamagotchi.fed_block = new_fed_block;
+            msg::reply(new_fed, 0).expect("Error in sending fed");
+        }
+        TmgAction::Entertain => {
+            let entertained = _tamagotchi.entertained;
+            let entertained_block = _tamagotchi.entertained_block;
+            let current_block = exec::block_timestamp();
+            let time_passed = current_block - entertained_block;
+            let new_entertained = entertained + time_passed * BOREDOM_PER_BLOCK;
+            let new_entertained = if new_entertained > 1000 {
+                1000
+            } else {
+                new_entertained
+            };
+            let new_entertained_block = current_block;
+            _tamagotchi.entertained = new_entertained;
+            _tamagotchi.entertained_block = new_entertained_block;
+            msg::reply(new_entertained, 0).expect("Error in sending entertained");
+        }
+        TmgAction::Sleep => {
+            let slept = _tamagotchi.slept;
+            let slept_block = _tamagotchi.slept_block;
+            let current_block = exec::block_timestamp();
+            let time_passed = current_block - slept_block;
+            let new_slept = slept + time_passed * ENERGY_PER_BLOCK;
+            let new_slept = if new_slept > 1000 {
+                1000
+            } else {
+                new_slept
+            };
+            let new_slept_block = current_block;
+            _tamagotchi.slept = new_slept;
+            _tamagotchi.slept_block = new_slept_block;
+            msg::reply(new_slept, 0).expect("Error in sending slept");
+        }
     };
     // TODO: 5️⃣ Add new logic for calculating the `fed`, `entertained` and `slept` levels
 }
