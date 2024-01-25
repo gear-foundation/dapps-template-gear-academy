@@ -1,7 +1,17 @@
 #![no_std]
 
 #[allow(unused_imports)]
-use gstd::prelude::*;
+use gstd::{debug, exec, msg, prelude::*};
+use tamagotchi_nft_io::{Tamagotchi,TmgEvent, TmgAction};
+
+const HUNGER_PER_BLOCK: u64 = 1;
+const BOREDOM_PER_BLOCK: u64 = 2;
+const ENERGY_PER_BLOCK: u64 = 2;
+const FILL_PER_FEED: u64 = 1000;
+const FILL_PER_ENTERTAINMENT: u64 = 1000;
+const FILL_PER_SLEEP: u64 = 1000;
+
+static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
 #[no_mangle]
 extern fn init() {
