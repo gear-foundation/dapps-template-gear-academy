@@ -5,6 +5,7 @@ edition.workspace = true
 publish.workspace = true
 
 [dependencies]
+chrono = { version = "0.4.33", default-features = false, features = ["alloc"] }
 gstd.workspace = true
 tamagotchi-io.workspace = true
 
