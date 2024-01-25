@@ -1,19 +1,42 @@
 #![no_std]
 
 #[allow(unused_imports)]
-use gstd::prelude::*;
+use gstd::{debug, msg, prelude::*};
+use tamagotchi_io::*;
+
+static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
 #[no_mangle]
-extern fn init() {
-    // TODO: 5️⃣ Initialize the Tamagotchi program
+extern "C" fn init() {
+    let name: String = msg::load().expect("Can't load init message");
+    debug!("Tamagotchi named: {:?}", name);
+    let date_of_birth: u64 = gstd::exec::block_timestamp();
+    let tmg = Tamagotchi {
+        name,
+        date_of_birth,
+    };
+    unsafe { TAMAGOTCHI = Some(tmg) };
 }
 
 #[no_mangle]
-extern fn handle() {
-    // TODO: 6️⃣ Add handling of `Name` and `Age` actions
+extern "C" fn handle() {
+    let input_msg: TmgAction = msg::load().expect("Error in loading TmgAction");
+    let tmg = unsafe { TAMAGOTCHI.as_ref().expect("The contract isn't initialized") };
+    match input_msg {
+        TmgAction::Name => {
+            debug!("Message: Name");
+            msg::reply(tmg.name.clone(), 0).expect("Error in sending reply");
+        }
+        TmgAction::Age => {
+            debug!("Message: Age");
+            let age = gstd::exec::block_timestamp() - tmg.date_of_birth;
+            msg::reply(age, 0).expect("Error in sending reply");
+        }
+    }
 }
 
 #[no_mangle]
-extern fn state() {
-    // TODO: 7️⃣ Return the Tamagotchi state
+extern "C" fn state() {
+    let tmg = unsafe { TAMAGOTCHI.as_ref().expect("The contract isn't initialized") };
+    msg::reply(tmg, 0).expect("Failed to share state");
 }
