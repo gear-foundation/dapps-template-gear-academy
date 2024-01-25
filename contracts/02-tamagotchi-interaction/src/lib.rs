@@ -59,10 +59,10 @@ extern fn handle() {
 
     let _event = match action {
         TmgAction::Name => {
-            msg::reply(name, 0).expect("Error in sending name");
+            msg::reply(TmgEvent::Name(name.to_string()), 0).expect("Error in sending name");
         }
         TmgAction::Age =>{
-            msg::reply(age, 0).expect("Error in sending age");
+            msg::reply(TmgEvent::Age(age), 0).expect("Error in sending age");
            
         } 
         TmgAction::Feed => {
@@ -77,7 +77,7 @@ extern fn handle() {
             let new_fed_block: u64 = current_block;
             _tamagotchi.fed = new_fed;
             _tamagotchi.fed_block = new_fed_block;
-            msg::reply(new_fed, 0).expect("Error in sending fed");
+            msg::reply(TmgEvent::Fed(new_fed), 0).expect("Error in sending fed");
         }
         TmgAction::Entertain => {
             let entertained: u64 = _tamagotchi.entertained;
@@ -91,7 +91,7 @@ extern fn handle() {
             let new_entertained_block: u64 = current_block;
             _tamagotchi.entertained = new_entertained;
             _tamagotchi.entertained_block = new_entertained_block;
-            msg::reply(new_entertained, 0).expect("Error in sending entertained");
+            msg::reply(TmgEvent::Entertained(new_entertained), 0).expect("Error in sending entertained");
             
         }
         TmgAction::Sleep => {
@@ -106,7 +106,7 @@ extern fn handle() {
             let new_slept_block: u64 = current_block;
             _tamagotchi.slept = new_slept;
             _tamagotchi.slept_block = new_slept_block;
-            msg::reply(new_slept, 0).expect("Error in sending slept");
+            msg::reply(TmgEvent::Slept(new_slept), 0).expect("Error in sending slept");
         
         }
     };
