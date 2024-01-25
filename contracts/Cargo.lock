@@ -5711,6 +5711,7 @@ dependencies = [
 name = "tamagotchi-io"
 version = "0.3.3"
 dependencies = [
+ "gear-core",
  "gmeta",
  "gstd",
 ]
