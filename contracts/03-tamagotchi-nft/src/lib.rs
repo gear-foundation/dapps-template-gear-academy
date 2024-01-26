@@ -110,7 +110,7 @@ extern fn handle() {
             if _tamagotchi.owner == msg::source() {
                 _tamagotchi.owner = new_owner;
                 msg::reply(TmgEvent::Transfer(new_owner), 0).expect("Error in sending transfer");
-               
+                // debug!("Tamagotchi Transfered to account: {:?}", new_owner)
             }else{
                 panic!("You are not the owner of this Tamagotchi");}
          
@@ -119,6 +119,7 @@ extern fn handle() {
             if _tamagotchi.owner == msg::source() {
             _tamagotchi.approved_account = Some(account);
             msg::reply(TmgEvent::Approve(account), 0).expect("Error in sending approve");
+            // debug!("Approved account: {:?}", account)
             }else{
                 panic!("You are not the allowed to approve accounts for this Tamagotchi");}
         }
@@ -126,6 +127,7 @@ extern fn handle() {
             if _tamagotchi.owner == msg::source() {
             _tamagotchi.approved_account = None;
             msg::reply(TmgEvent::RevokeApproval, 0).expect("Error in sending revoke approval");
+            // debug!("Approved account: {:?} has been revoked", _tamagotchi.approved_account)
             }else{
                 panic!("You are not the allowed to revoke approval for this Tamagotchi");}
             }
