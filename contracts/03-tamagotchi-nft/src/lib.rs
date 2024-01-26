@@ -28,6 +28,7 @@ extern fn init() {
         entertained_block: exec::block_height().into(),
         slept: 1000,
         slept_block: exec::block_height().into(),
+        approved_account: None,
     };
     debug!(
         "The Tamagotchi Program was initialized with name {:?}, birth date {:?}, owner: {:?}",
@@ -105,6 +106,29 @@ extern fn handle() {
             msg::reply(TmgEvent::Slept(new_slept), 0).expect("Error in sending slept");
         
         }
+        TmgAction::Transfer(new_owner) => {
+            if _tamagotchi.owner == msg::source() {
+                _tamagotchi.owner = new_owner;
+                msg::reply(TmgEvent::Transfer(new_owner), 0).expect("Error in sending transfer");
+               
+            }else{
+                panic!("You are not the owner of this Tamagotchi");}
+         
+        }
+        TmgAction::Approve(account) => {
+            if _tamagotchi.owner == msg::source() {
+            _tamagotchi.approved_account = Some(account);
+            msg::reply(TmgEvent::Approve(account), 0).expect("Error in sending approve");
+            }else{
+                panic!("You are not the allowed to approve accounts for this Tamagotchi");}
+        }
+        TmgAction::RevokeApproval => {
+            if _tamagotchi.owner == msg::source() {
+            _tamagotchi.approved_account = None;
+            msg::reply(TmgEvent::RevokeApproval, 0).expect("Error in sending revoke approval");
+            }else{
+                panic!("You are not the allowed to revoke approval for this Tamagotchi");}
+            }
     };
 }
 
