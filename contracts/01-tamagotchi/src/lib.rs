@@ -10,28 +10,15 @@ static mut TAMAGOTCHI: Option<Tamagotchi> = None;
 
 #[no_mangle]
 extern fn init() {
-    let tamagochi: Tamagotchi = Tamagotchi {
-        name: String::from("Ivan"),
-        date_of_birth: 45,
-    };
-    let init_msg: String = msg::load().expect("Can't decode an init message");
-
-    let tamagotchi = Tamagotchi {
-        name: "Ivan".to_string(),
+    let tamagotchi: Tamagotchi = Tamagotchi {
+        name:msg::load().expect("Can't decode an init message"),
         date_of_birth: exec::block_timestamp(),
     };
     debug!(
         "The Tamagotchi Program was initialized with name {:?} and birth date {:?}",
         tamagotchi.name, tamagotchi.date_of_birth
     );
-    unsafe { TAMAGOTCHI = Some(tamagotchi) };
-
-   
-    debug!("Program was initialized with message {:?}",
-    init_msg);
-    let block = exec::block_timestamp();
-    debug!("Current block timestamp is {}", block);
-   
+    unsafe { TAMAGOTCHI = Some(tamagotchi) }; 
 }
 
 #[no_mangle]
@@ -45,10 +32,8 @@ extern fn handle() {
     
     let name = &_tamagotchi.name;
     let current_time = exec::block_timestamp();
-    let age = current_time - _tamagotchi.date_of_birth;
+    let age = current_time.saturating_sub(_tamagotchi.date_of_birth);
     let action: TmgAction = msg::load().expect("Can't decode an action message");
-    
-    // 
 
     let _event = match action {
         TmgAction::Name => {

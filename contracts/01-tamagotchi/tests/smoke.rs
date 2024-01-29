@@ -1,11 +1,6 @@
 use gstd::debug;
 use gtest::{Log, Program, System};
-use tamagotchi_io:: TmgAction;
-
-
-
-
-
+use tamagotchi_io::TmgAction;
 
 
 #[test]
@@ -14,7 +9,7 @@ fn smoke_test() {
     sys.init_logger();
     let program: Program<'_> = Program::current(&sys);
   
-    let res = program.send(2, String::from("Init Tamagotchi"));
+    let res = program.send(2, String::from("Ivan"));
     
     assert!(!res.main_failed());
 
@@ -25,7 +20,7 @@ fn smoke_test() {
     .payload(String::from("Ivan"));
      assert!(res_tmgAction_name.contains(&expected_log));
 
-//     let res_tmgAction_age = program.send(2, TmgAction::Age);
-// debug!("tamagotchi age is: {:?}", res_tmgAction_age);
+    let res_tmgAction_age = program.send(2, TmgAction::Age);
+    assert!(!res_tmgAction_age.main_failed());
     
 }
