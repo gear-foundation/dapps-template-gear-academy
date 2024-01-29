@@ -13,7 +13,7 @@ fn owning_test() {
     let _program = Program::current(&sys);
 
     
-    let res = _program.send(2, String::from("Init Tamagotchi"));
+    let res = _program.send(2, String::from("Ivan"));
     
     assert!(!res.main_failed());
 

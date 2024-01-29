@@ -19,7 +19,7 @@ extern fn init() {
     let init_msg: String = msg::load().expect("Can't decode an init message");
 
     let tamagotchi = Tamagotchi {
-        name: "Ivan".to_string(),
+        name: msg::load().expect("Can't decode tamagotchi's name"),
         date_of_birth: exec::block_timestamp(),
         owner: msg::source(),
         fed: 1000,
@@ -49,7 +49,7 @@ extern fn handle() {
     
     let name = &_tamagotchi.name;
     let current_time = exec::block_timestamp();
-    let age = current_time - _tamagotchi.date_of_birth;
+    let age = current_time.saturating_sub(_tamagotchi.date_of_birth);
     let action: TmgAction = msg::load().expect("Can't decode an action message");
     
     // 
@@ -66,7 +66,7 @@ extern fn handle() {
             let fed: u64 = _tamagotchi.fed;
             let fed_block: u64 = _tamagotchi.fed_block;
             let current_block: u64 = exec::block_height().into();
-            let time_passed: u64 = current_block - fed_block;
+            let time_passed: u64 = current_block.saturating_sub(fed_block);
             let hunger: u64 = time_passed * HUNGER_PER_BLOCK;
             let current_fed:u64  = fed - hunger;
             let new_fed:u64 = current_fed + FILL_PER_FEED;
