@@ -35,7 +35,7 @@ extern fn handle() {
     let age = current_time.saturating_sub(_tamagotchi.date_of_birth);
     let action: TmgAction = msg::load().expect("Can't decode an action message");
 
-    let _event = match action {
+    match action {
         TmgAction::Name => {
             msg::reply(name, 0).expect("Error in sending name");
         }
