@@ -21,7 +21,7 @@ members = [
 
 [workspace.dependencies]
 gclient = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
-gear-core = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
+gear-core = { git = "https://github.com/gear-tech/gear", tag = "v1.2.0" }
 gear-wasm-builder = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 gmeta = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
 gsdk = { git = "https://github.com/gear-tech/gear", tag = "v1.0.2" }
